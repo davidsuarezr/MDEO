@@ -1,0 +1,194 @@
+(* ::Package:: *)
+
+(* :Title: DMDM-Z'Z'													*)
+
+(*
+	This software is covered by the GNU General Public License 3.
+	Copyright (C) 1990-2020 Rolf Mertig
+	Copyright (C) 1997-2020 Frederik Orellana
+	Copyright (C) 2014-2020 Vladyslav Shtabovenko
+*)
+
+(* :Summary:  DMDM\[Rule]Z'Z', Dark U1 model, matrix element squared, tree			*)
+
+(* ------------------------------------------------------------------------ *)
+
+
+
+(* ::Title:: *)
+(*Annihilation of DM in two dark photons (U1D dark model)*)
+
+
+(* ::Section:: *)
+(*Load FeynCalc and the necessary add-ons or other packages*)
+
+
+description="DM DM -> Z'Z', MDEOEWSB, matrix element squared, tree";
+If[ $FrontEnd === Null,
+	$FeynCalcStartupMessages = False;
+	Print[description];
+];
+If[ $Notebooks === False,
+	$FeynCalcStartupMessages = False
+];
+$LoadAddOns={"FeynArts"};
+<<FeynCalc`
+$FAVerbose = 0;
+
+FCCheckVersion[9,3,1];
+
+
+(* ::Section:: *)
+(*Generate Feynman diagrams*)
+
+
+(* ::Text:: *)
+(*Nicer typesetting*)
+
+
+MakeBoxes[p1,TraditionalForm]:="\!\(\*SubscriptBox[\(p\), \(1\)]\)";
+MakeBoxes[p2,TraditionalForm]:="\!\(\*SubscriptBox[\(p\), \(2\)]\)";
+MakeBoxes[k1,TraditionalForm]:="\!\(\*SubscriptBox[\(k\), \(1\)]\)";
+MakeBoxes[k2,TraditionalForm]:="\!\(\*SubscriptBox[\(k\), \(2\)]\)";
+
+
+(*
+diags = InsertFields[CreateTopologies[0, 2 -> 2], {F[2, {1}], -F[2, {1}]} ->
+		{V[1], V[1]}, InsertionLevel -> {Classes},
+		Restrictions->QEDOnly];
+
+Paint[diags, ColumnsXRows -> {2, 1}, Numbering -> Simple,
+	SheetHeader->None,ImageSize->{512,256}];
+*)
+
+
+diags = InsertFields[CreateTopologies[0, 2 -> 2], {F[5], -F[5]} ->
+		{V[10], V[10]}, InsertionLevel -> {Classes}, Model->"MDEOEWSB", ExcludeParticles->{S[1]}];
+		
+Paint[diags, ColumnsXRows -> {2, 1}, Numbering -> Simple,
+	SheetHeader->None,ImageSize->{512,256}];
+
+
+(* ::Section:: *)
+(*Obtain the amplitude*)
+
+
+amp[0] = FCFAConvert[CreateFeynAmp[diags], IncomingMomenta->{p1,p2},
+	OutgoingMomenta->{k1,k2},UndoChiralSplittings->True,ChangeDimension->4,
+	TransversePolarizationVectors->{k1,k2}, List->False, (*SMP->True,*)
+	Contract->True]/.{CTWp->1,STWp->0,MassChi->Mx}
+
+
+(* ::Section:: *)
+(*Fix the kinematics*)
+
+
+FCClearScalarProducts[];
+SetMandelstam[s, t, u, p1, p2, -k1, -k2, Mx, Mx, MZp, MZp];
+
+
+(* ::Section:: *)
+(*Square the amplitude*)
+
+
+(*ampSquared[0] = (amp[0] (ComplexConjugate[amp[0]]))//
+	FeynAmpDenominatorExplicit//
+	DoPolarizationSums[#,k1,0]&//DoPolarizationSums[#,k2,0]&//
+	FermionSpinSum[#, ExtraFactor -> 1/2^2]&//
+	DiracSimplify//
+	TrickMandelstam[#,{s,t,u,2SMP["m_e"]^2}]&//Simplify*)
+
+
+(* ::Text:: *)
+(*We need to multiply by 1/2 to account for two identical particles in the final state*)
+
+
+ampSquared[0] = (amp[0] (ComplexConjugate[amp[0]]))//
+	FeynAmpDenominatorExplicit//
+	DoPolarizationSums[#,k1]&//DoPolarizationSums[#,k2]&//
+	FermionSpinSum[#, ExtraFactor -> 1/(2*2^2)]&//
+	DiracSimplify//
+	TrickMandelstam[#,{s,t,u,2*MZp^2+2*Mx^2}]&//Simplify
+
+
+(* ::Text:: *)
+(*DoPolarizationSums[exp,k] *)
+(*sums over the three polarizations of an external massive vector boson with momentum k and mass k^2.*)
+
+
+(* ::Subsubsection:: *)
+(*Expand the ampSquared*)
+
+
+AMP2 = -(1/(4 MZp^4 (Mx^2-t)^2 (Mx^2-u)^2)) gBL^4 (2 Mx^12-3 Mx^10 (482 MZp^2+t+u)+Mx^8 (195844 MZp^4+2892 MZp^2 (t+u)+(t+u)^2)+2 Mx^6 (2166 MZp^6-1444 MZp^4 (t+u)-2 MZp^2 (452 t^2+1265 t u+452 u^2)+t u (t+u))-Mx^4 (198732 MZp^8-128156 MZp^6 (t+u)+MZp^4 (95753 t^2+450718 t u+95753 u^2)-2 MZp^2 (181 t^3+1265 t^2 u+1265 t u^2+181 u^3)+t u (t^2+4 t u+u^2))+Mx^2 (198732 MZp^8 (t+u)-10 MZp^6 (253 t^2+52056 t u+253 u^2)+32400 MZp^4 (t^3+7 t^2 u+7 t u^2+u^3)-2 MZp^2 t u (181 t^2+361 t u+181 u^2)+t^2 u^2 (t+u))+33122 MZp^4 (MZp^4 (t^2-8 t u+u^2)+4 MZp^2 t u (t+u)-t u (t^2+u^2)))
+
+
+k1={E1,p1,0,0}; (*Halzen and Martin book*)
+k2={E1,-p1,0,0}; 
+k3={E1,p3*ct,p3*st,0};
+k4={E1,-p3*ct,-p3*st,0};
+
+guv={{1,0,0,0},{0,-1,0,0},{0,0,-1,0},{0,0,0,-1}};
+MV = Simplify[{S->(k1 + k2).guv.(k1 + k2),   T->(k1 - k3).guv.(k1 - k3),   U ->(k1 - k4).guv.(k1 - k4)}];
+MV // MatrixForm
+
+
+Phase space \!\(TraditionalForm\`factor\)
+cinematic={E1->Sqrt[(p1)^2+Mx^2],p3->Sqrt[(p1)^2+Mx^2-MZp^2],p1->Mx*v*(1+0*v^2/2)}; (*relativistic p1*)
+F1=Simplify[(1/(64*\[Pi]^2*S)*Sqrt[((S-(MZp+MZp)^2)(S-(MZp-MZp)^2))/((S-(Mx+Mx)^2)(S-(Mx-Mx)^2))])/.MV//.cinematic];
+F2=Normal[Series[F1,{v,0,2}]]
+Sqrt[1-MZp^2/Mx^2]/(256 Mx^2 \[Pi]^2 v)+((-2 Mx^2+3 MZp^2) v)/(512 Mx^4 Sqrt[(Mx^2-MZp^2)/Mx^2] \[Pi]^2)
+
+
+F3 = Simplify[AMP2/.{u->U,t->T,s->S}/.MV//.cinematic/.st^2-> 1-ct^2]
+
+
+F4 = Collect[Normal[Series[F3,{v,0,2}]],{v,v^2}]
+
+
+F5=Simplify[F4/.v->0]
+
+
+(* ::Subsubsection:: *)
+(*d\[Sigma]/d\[CapitalOmega]*)
+
+
+F7=Simplify[F2*F4]
+
+
+(* ::Subsubsection:: *)
+(*\[Sigma](v)=\[Integral] (d\[Sigma]/d\[CapitalOmega])d\[CapitalOmega]*)
+
+
+Integrate[((F7*2Pi*Sin[t])//.{st->Sin[t],ct->Cos[t]}),{t,0,Pi}];
+sigma=Normal[Series[%,{v,0,2}]]
+
+
+(* ::Subsubsection:: *)
+(*\[Sigma] .vr*)
+
+
+sigmavr=Simplify[(sigma*v)/.v->(vr/2)]
+
+
+(* ::Subsubsection:: *)
+(*S - wave part*)
+
+
+F8= Simplify[sigmavr/.vr->0/.MZp->r*Mx]
+
+
+722/(32*4)
+
+
+N[722/(2*4)]
+
+
+(* ::Subsubsection:: *)
+(*P - wave part*)
+
+
+F9=Simplify[Simplify[D[D[sigmavr,vr],vr]/2/.vr->0/.MZp->r*Mx]*vr^2/.(228605 r^10-341109 r^8+55065 r^6+598366 r^4-1468 r^2+16) ->(-1468 r^2+16)]
+
+
+4/96
