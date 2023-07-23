@@ -60,7 +60,7 @@ ParticleDefinitions[GaugeES] = {
                  LaTeX -> "H^-",
                  OutputName -> "Hm" }},                                              
       
-      {VP,   { Description -> "Photon"}}, 
+       {VP,   { Description -> "Photon"}}, 
       {VZ,   { Description -> "Z-Boson",
       			 Goldstone -> Ah[{1}] }}, 
       {VG,   { Description -> "Gluon" }},          
@@ -81,23 +81,23 @@ ParticleDefinitions[GaugeES] = {
       {Fe,   { Description -> "Leptons" }},
       {Fv,   { Description -> "Neutrinos",
      			PDG ->{12,14,16,8810012,8810014} }},
-        
-      {Chi,  { (*Description -> "Singlet Fermions",*)
+      {Chi,  { Description -> "Singlet Fermions",
 	       PDG -> {1012},
 	       Mass -> LesHouches,
 	       ElectricCharge -> 0,
-	       FeynArtsNr -> 5,
-	       LaTeX -> "chi",
-	       OutputName -> "chi" }},
-	       
-      {Xi,  { (*Description -> "Singlet Fermions 2",*)
+	       LaTeX -> "\\chi",
+	       OutputName -> "Chi" }},
+      {Xi,  { Description -> "Singlet Fermions 2",
 	       PDG -> {1022, 1023, 1024},
 	       Mass -> LesHouches,
 	       ElectricCharge -> 0,
-	       FeynArtsNr -> 6,
 	       LaTeX -> "\\Xi",
 	       OutputName -> "Xi" }}
+
+
         };    
+        
+        
         
  WeylFermionAndIndermediate = {
      

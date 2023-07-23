@@ -23,15 +23,16 @@ DEFINITION[MatchingConditions]= {
  {vH, vSM}
  };
 
+
 BoundaryLowScaleInput={
- {g1p, g1pINPUT},
- {g11p, g11pINPUT},
- {g1p1, g1p1INPUT},
+ {g1p,g1pINPUT},
+ {g11p,g11pINPUT},
+ {g1p1,g1p1INPUT},
  {L1, Lambda1INPUT},
  {L2, Lambda2INPUT},
  {L3, Lambda3INPUT},
- {vX, vXinput},
- {yc, ycinput},
+ {vX,vXinput},
+ {yc,ycinput},
  {yx, LHInput[yx]}
 };
 
