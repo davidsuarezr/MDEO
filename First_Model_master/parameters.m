@@ -37,11 +37,6 @@ ParameterDefinitions = {
 {\[Lambda],  { Description -> "SM Higgs Selfcouplings"}},
 {vH,          { Description -> "EW-VEV",
                DependenceSPheno -> None }},
-{vX,      {  LaTeX -> "vx",
-             Dependence ->  None, 
-             OutputName -> vX,
-             Real -> True,
-             LesHouches -> {BL,43} }},
 
 {ThetaW,    { Description -> "Weinberg-Angle"}},
 {ThetaWp,  { Description -> "Theta'", DependenceNum -> None  }},
@@ -81,21 +76,81 @@ ParameterDefinitions = {
       LaTeX -> "\\lambda_8",
       LesHouches -> {BL,8}}},
 
+{L9, {OutputName -> lam9,
+      LaTeX -> "\\lambda_9",
+      LesHouches -> {BL,9}}},
+
+{L10, {OutputName -> lam10,
+      LaTeX -> "\\lambda_{10}",
+      LesHouches -> {BL,10}}},
+
+{L11, {OutputName -> lam11,
+      LaTeX -> "\\lambda_{11}",
+      LesHouches -> {BL,11}}},
+
+{L12, {OutputName -> lam12,
+      LaTeX -> "\\lambda_{12}",
+      LesHouches -> {BL,12}}},
+
+{L13, {OutputName -> lam13,
+      LaTeX -> "\\lambda_{13}      ",
+      LesHouches -> {BL,13}}},
+
+{L14, {OutputName -> lam14,
+      LaTeX -> "\\lambda_{14}",
+      LesHouches -> {BL,14}}},
+
+{L15, {OutputName -> lam15,
+      LaTeX -> "\\lambda_{15}",
+      LesHouches -> {BL,15}}},
+
+{L16, {OutputName -> lam16,
+      LaTeX -> "\\lambda_{16}",
+      LesHouches -> {BL,16}}},
+
+{L17, {OutputName -> lam17,
+      LaTeX -> "\\lambda_{17}",
+      LesHouches -> {BL,17}}},
+
+{L18, {OutputName -> lam18,
+      LaTeX -> "\\lambda_{19}",
+      LesHouches -> {BL,19}}},
+
+{L19, {OutputName -> lam19,
+      LaTeX -> "\\lambda_{19}",
+      LesHouches -> {BL,19}}},
+
 {MuP, {OutputName -> MUP,
       LaTeX -> "\\mu'",
-      LesHouches -> {BL,10}}},
+      LesHouches -> {BL,20}}},
 
 {mu2, {OutputName -> mu,
       LaTeX -> "\\mu_2",
-      LesHouches -> {BL,11}}},
+      LesHouches -> {BL,21}}},
 
 {mH2, {OutputName -> mH2,
       LaTeX -> "\\m^2_H",
-      LesHouches -> {BL,20}}},
+      LesHouches -> {BL,22}}},
 
-{mchi2, {OutputName -> mX2,
+{mxi2, {OutputName -> mX2,
+      LaTeX -> "\\m^2_{\\xi}",
+      LesHouches -> {BL,23}}},
+
+{mchi2, {OutputName -> MC2,
       LaTeX -> "\\m^2_\\chi",
-      LesHouches -> {BL,21}}},
+      LesHouches -> {BL,24}}},
+
+{MUS, {OutputName -> muS,
+      LaTeX -> "\\mu_s",
+      LesHouches -> {BL,25}}},
+
+{mK2, {LaTeX -> "m_{\\kappa}^2",
+	LesHouches -> {BL,26},
+	OutputName-> MK2 }},
+
+{MR2, {LaTeX -> "M_R^2",
+       LesHouches -> {BL,27},
+	   OutputName-> MR2}},
 
 {mEt2, {LaTeX -> "m_{\\eta}^2",
 	LesHouches -> {BL,28},
@@ -105,21 +160,13 @@ ParameterDefinitions = {
        LesHouches -> {BL,29},
 	   OutputName-> MS2}},
 
-{MUS, {OutputName -> muS,
-      LaTeX -> "\\mu_s",
-      LesHouches -> {BL,30}}},
-
-{yc, {OutputName -> YC,
-      LaTeX -> "y_c",
-      LesHouches -> {BL,31}}},
-
-{yx,   {LaTeX -> "y_X",
-	LesHouches -> YX,
-	OutputName->YX }},
-
 {lc,     {OutputName ->"LC",
              LaTeX -> "\\lambda_C",
              LesHouches -> {BL,30}}},
+
+{lc2,     {OutputName ->"LC2",
+             LaTeX -> "\\lambda_{C2}",
+             LesHouches -> {BL,31}}},
 
 {LamSH,     {OutputName ->"LSH",
              LaTeX -> "\\lambda_{SH}",
@@ -129,6 +176,18 @@ ParameterDefinitions = {
              LaTeX -> "\\lambda_S",
              LesHouches -> {BL,33}}},
 
+{lq,     {OutputName ->"LQ",
+             LaTeX -> "\\lambda_Q",
+             LesHouches -> {BL,34}}},
+
+{yx, {OutputName -> YX,
+      LaTeX -> "Y_x",
+      LesHouches -> {BL,35}}},
+
+{yc, {OutputName -> YC,
+      LaTeX -> "Y_c",
+      LesHouches -> {BL,36}}},
+
 {y1, {OutputName -> Y1,
       LaTeX -> "Y_1",
       LesHouches -> Y1}},
@@ -137,12 +196,31 @@ ParameterDefinitions = {
       LaTeX -> "Y_2",
       LesHouches -> Y2}},
 
+{y3, {OutputName -> Y3,
+      LaTeX -> "Y_3",
+      LesHouches -> Y3}},
+
+{y4, {OutputName -> Y4,
+      LaTeX -> "Y_4",
+      LesHouches -> Y4}},
+
+{vX,      {  LaTeX -> "v_X",
+             Dependence ->  None,
+             OutputName -> vX,
+             Real -> True,
+             LesHouches -> {BL,39} }},
+
+
+
 {Vu,        {Description ->"Left-Up-Mixing-Matrix"}},
 {Vd,        {Description ->"Left-Down-Mixing-Matrix"}},
 {Uu,        {Description ->"Right-Up-Mixing-Matrix"}},
 {Ud,        {Description ->"Right-Down-Mixing-Matrix"}}, 
 {Ve,        {Description ->"Left-Lepton-Mixing-Matrix"}},
 {Ue,        {Description ->"Right-Lepton-Mixing-Matrix"}},
+
+{ZM,	    {Description -> "Neutrino-Mixing-Matrix"}},
+
 {ZH,        { Description->"Scalar-Mixing-Matrix", 
                Dependence -> None,
                DependenceOptional -> None,
@@ -151,36 +229,18 @@ ParameterDefinitions = {
                 Dependence -> None,
                DependenceOptional -> None,
                DependenceNum -> None   }},
-                {XL,{Description ->"Left-Neutrino-Mixing-Matrix",
-      LesHouches -> LNEUTRINOMIX,
-      Dependence ->  None,
-      Value -> None,
-      LaTeX -> "X^{\\nu}_L",
-      OutputName-> XL}},
- {XR,{Description ->"Right-Neutrino-Mixing-Matrix",
-      LesHouches -> RNEUTRINOMIX,
-      Dependence ->  None,
-      Value -> None,
-      LaTeX -> "X^{\\nu}_R",
-      OutputName-> XR}},
-{ZL,        { (*Description->"Left-Handed-Chiral-Fermions-Mixing-Matrix",*)
-               Dependence -> None,
-               DependenceOptional -> None,
-               DependenceNum -> None,
-               LesHouches -> LEFTMIX,
-               OutputName -> ZL}},
-{ZR,        { (*Description->"Right-Handed-Chiral-Fermions-Mixing-Matrix",*)
-               Dependence -> None,
-               DependenceOptional -> None,
-               DependenceNum -> None,
-               LesHouches -> RIGHTMIX,
-               OutputName -> ZR}},
 {ZN,        { Description->"Neutral-Scalar-Mixing-Matrix",
                Dependence -> None,
                DependenceOptional -> None,
                DependenceNum -> None,
                LesHouches -> NEUTRALMIX,
-               OutputName -> ZN}}
-}; 
+               OutputName -> ZN}},
+{ZT,        { Description->"Neutral-Scalar-Mixing-Matrix-2",
+               Dependence -> None,
+               DependenceOptional -> None,
+               DependenceNum -> None,
+               LesHouches -> SECONDNEUTRALMIX,
+               OutputName -> ZT}}
+ };
  
 

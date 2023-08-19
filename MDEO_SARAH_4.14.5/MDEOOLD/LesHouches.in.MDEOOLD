@@ -16,7 +16,7 @@ Block MINPAR      # Input parameters
  10   5.263433E-02    # g1pINPUT
  11   0.000000E+00    # g1p1INPUT
  12   0.000000E+00    # g11pINPUT
- 20   1.738920E+04    # mEt2input
+ 20   1.738920E-01    # mEt2input
  21   2.499221E+03    # vXinput
 Block SPhenoInput   # SPheno specific input 
   1 -1              # error level 

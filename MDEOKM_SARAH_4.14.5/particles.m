@@ -79,7 +79,8 @@ ParticleDefinitions[GaugeES] = {
       {Fd,   { Description -> "Down-Quarks"}},   
       {Fu,   { Description -> "Up-Quarks"}},   
       {Fe,   { Description -> "Leptons" }},
-      {Fv,   { Description -> "Neutrinos"}},
+      {Fv,   { Description -> "Neutrinos",
+     			PDG ->{12,14,16,8810012,8810014} }},
         
       {Chi,  { (*Description -> "Singlet Fermions",*)
 	       PDG -> {1012},
@@ -90,7 +91,7 @@ ParticleDefinitions[GaugeES] = {
 	       OutputName -> "chi" }},
 	       
       {Xi,  { (*Description -> "Singlet Fermions 2",*)
-	       PDG -> {1022, 1023},
+	       PDG -> {1022, 1023, 1024},
 	       Mass -> LesHouches,
 	       ElectricCharge -> 0,
 	       FeynArtsNr -> 6,

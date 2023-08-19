@@ -4,6 +4,8 @@ Model`Name = "MDEO";
 Model`NameLaTeX ="Mutli Component Dirac Effective operator";
 Model`Authors = "David Suarez";
 Model`Date = "2022-23-03";
+(*2023-01-07 FeynArts numbers: Andres*)
+(*2023-01-07 Se quita el \\chi *)
 
 (*-------------------------------------------*)
 (*   Particle Content*)
@@ -32,7 +34,6 @@ FermionFields[[7]] = {CL, 1,       cl,     0, 1,  1,    9, -1, 1};
 FermionFields[[8]] = {CR, 1, conj[cr],     0, 1,  1,  -10, -1, 1};
 FermionFields[[9]] = {XL, 3,       xl,     0, 1,  1,    6,  1, -1};
 FermionFields[[10]] = {XR, 3, conj[xr],     0, 1,  1,  -5,  1, -1};
-
 
 ScalarFields[[1]] = {H,    1, {H0, Hm},    -1/2, 2, 1,    0,  1, 1};
 ScalarFields[[2]] = {bi,   1,      BiD,       0, 1, 1,   -1,  1, 1};
@@ -68,14 +69,11 @@ DEFINITION[EWSB][GaugeSector] =
   {{VWB[1],VWB[2]},{VWm,conj[VWm]},ZW}
 };
 
-
-
 (* ----- VEVs ---- *)
 
 DEFINITION[EWSB][VEVs]=
 {    {H0, {vH, 1/Sqrt[2]}, {sigmaH, \[ImaginaryI]/Sqrt[2]},{phiH, 1/Sqrt[2]}},
      {BiD,{vX, 1/Sqrt[2]}, {sigmaB, \[ImaginaryI]/Sqrt[2]},{phiB, 1/Sqrt[2]}}     };
-
 
 DEFINITION[EWSB][MatterSector]=
     {
@@ -88,7 +86,6 @@ DEFINITION[EWSB][MatterSector]=
      {{vL,conj[vR]}, {VL,ZM}}
 };
 
-
 (*------------------------------------------------------*)
 (* Dirac-Spinors *)
 (*------------------------------------------------------*)
@@ -98,8 +95,8 @@ DEFINITION[EWSB][DiracSpinors]={
  Fe ->{  EL, conj[ER]},
  Fu ->{  UL, conj[UR]},
  Fv ->{  VL, conj[VL]},
- Chi ->{  cl,  cr},
- Xi ->{  fl,  fr}};
+ Chi ->{ cl, cr},
+ Xi ->{  fl, conj[fr]}};
 
 DEFINITION[EWSB][GaugeES]={
  Fd1 ->{  FdL, 0},

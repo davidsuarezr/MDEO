@@ -1,6 +1,6 @@
 Off[General::spell]
 
-Model`Name = "MDEO";
+Model`Name = "MDEOLD";
 Model`NameLaTeX ="Mutli Component Dirac Effective operator";
 Model`Authors = "David Suarez";
 Model`Date = "2022-23-03";

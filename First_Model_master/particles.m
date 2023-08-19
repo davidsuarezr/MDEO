@@ -60,7 +60,7 @@ ParticleDefinitions[GaugeES] = {
                  LaTeX -> "H^-",
                  OutputName -> "Hm" }},                                              
       
-      {VP,   { Description -> "Photon"}}, 
+       {VP,   { Description -> "Photon"}}, 
       {VZ,   { Description -> "Z-Boson",
       			 Goldstone -> Ah[{1}] }}, 
       {VG,   { Description -> "Gluon" }},          
@@ -79,24 +79,61 @@ ParticleDefinitions[GaugeES] = {
       {Fd,   { Description -> "Down-Quarks"}},   
       {Fu,   { Description -> "Up-Quarks"}},   
       {Fe,   { Description -> "Leptons" }},
-      {Fv,   { Description -> "Neutrinos"}},
-        
-      {Chi,  { (*Description -> "Singlet Fermions",*)
-	       PDG -> {1012},
+      {Fv,   { Description -> "Neutrinos",
+     			PDG ->{12,14,16,8810012,8810014} }},
+      {Chi,  {PDG -> {1012},
 	       Mass -> LesHouches,
 	       ElectricCharge -> 0,
-	       FeynArtsNr -> 5,
-	       LaTeX -> "chi",
-	       OutputName -> "chi" }},
-	       
-      {Xi,  { (*Description -> "Singlet Fermions 2",*)
-	       PDG -> {1022, 1023},
+	       LaTeX -> "\\chi",
+	       OutputName -> "Chi" }},
+      {Xi,  {PDG -> {1021},
 	       Mass -> LesHouches,
 	       ElectricCharge -> 0,
-	       FeynArtsNr -> 6,
 	       LaTeX -> "\\Xi",
-	       OutputName -> "Xi" }}
-        };    
+	       OutputName -> "Xi" }},
+      {etI,   {  Description -> "CP-odd eta scalar",
+		 PDG -> {1002},
+		 Mass -> LesHouches,
+		 ElectricCharge -> 0,
+		 LaTeX -> "\\eta_I",
+		 OutputName -> "ETI" }},
+      {etm,   {  Description -> "Charged eta scalar",
+		 PDG -> {1003},
+		 Mass -> LesHouches,
+		 ElectricCharge -> -1,
+		 LaTeX -> "\\eta^-",
+                 OutputName -> "ETM" }},
+      {kpI,   {  Description -> "CP-odd kappa scalar",
+		 PDG -> {1022},
+		 Mass -> LesHouches,
+		 ElectricCharge -> 0,
+		 LaTeX -> "\\kappa_I",
+		 OutputName -> "KPI" }},
+      {kpm,   {  Description -> "Charged kappa scalar",
+		 PDG -> {1023},
+		 Mass -> LesHouches,
+		 ElectricCharge -> -1,
+		 LaTeX -> "\\kappa^-",
+                 OutputName -> "KPM" }},
+       {ns,  { Description -> "Neutral Scalars",
+                 PDG -> {1025,1026},
+                 Width -> Automatic,
+                 Mass ->LesHouches,
+                 FeynArtsNr -> 1000,
+                 ElectricCharge -> 0,
+                 LaTeX -> "S^0",
+                 OutputName -> "NS" }},
+       {nt,  { Description -> "Neutral Scalars 2",
+                 PDG -> {1035,1036},
+                 Width -> Automatic,
+                 Mass ->LesHouches,
+                 FeynArtsNr -> 1001,
+                 ElectricCharge -> 0,
+                 LaTeX -> "S^0_2",
+                 OutputName -> "NT" }}
+                 };
+        
+        
         
  WeylFermionAndIndermediate = {
      
@@ -105,6 +142,18 @@ ParticleDefinitions[GaugeES] = {
                  Mass -> Automatic,
                  LaTeX -> "H",
                  OutputName -> "" }},
+
+    {S,      {   PDG -> {0},
+                 Width -> 0,
+                 Mass -> Automatic,
+                 LaTeX -> "S",
+                 OutputName -> "S" }},
+
+    {Rh,      {   PDG -> {0},
+                 Width -> 0,
+                 Mass -> Automatic,
+                 LaTeX -> "\\rho",
+                 OutputName -> "Rh" }},
 
    {dR,     {LaTeX -> "d_R" }},
    {eR,     {LaTeX -> "e_R" }},

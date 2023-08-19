@@ -11,13 +11,13 @@ Block SMINPUTS    # Standard Model inputs
  7 1.776690E+00    # m_tau(pole) 
 Block MINPAR      # Input parameters 
  1   2.581465E-01    # Lambda1INPUT
- 2   4.8336503E-03    # Lambda2INPUT
+ 2   3.000000E+00    # Lambda2INPUT
  3   2.1625338E-05    # Lambda3INPUT
- 10   5.263433E-02    # g1pINPUT
+ 10   1.000000E-01    # g1pINPUT
  11   0.000000E+00    # g1p1INPUT
  12   0.000000E+00    # g11pINPUT
- 20   1.738920E+04    # mEt2input
- 21   2.499221E+03    # vXinput
+ 20   2.499221E+03    # vXinput
+ 21   3.500000E+00    # ycinput
 Block SPhenoInput   # SPheno specific input 
   1 -1              # error level 
   2  0              # SPA conventions 
@@ -72,9 +72,11 @@ Block SPhenoInput   # SPheno specific input
 1105 1             # Include Fe in 1.loop corrections 
 1106 1             # Include Fv in 1.loop corrections 
 1201 1             # Include Hm in 1.loop corrections 
-1202 1             # Include et0 in 1.loop corrections 
-1203 1             # Include hh in 1.loop corrections 
-1204 1             # Include Ah in 1.loop corrections 
+1202 1             # Include etm in 1.loop corrections 
+1203 1             # Include etI in 1.loop corrections 
+1204 1             # Include hh in 1.loop corrections 
+1205 1             # Include Ah in 1.loop corrections 
+1206 1             # Include ns in 1.loop corrections 
 1301 1             # Include VG in 1.loop corrections 
 1302 1             # Include VP in 1.loop corrections 
 1303 1             # Include VZ in 1.loop corrections 
@@ -90,17 +92,36 @@ Block SPhenoInput   # SPheno specific input
 1501 1               # Include Penguin diagrams 1.loop corrections 
 1502 1               # Include Box diagrams 1.loop corrections 
 Block DECAYOPTIONS   # Options to turn on/off specific decays 
-1    1     # Calc 3-Body decays of Fv 
-2    1     # Calc 3-Body decays of Fu 
-3    1     # Calc 3-Body decays of Fe 
-4    1     # Calc 3-Body decays of Fd 
+1    1     # Calc 3-Body decays of Fu 
+2    1     # Calc 3-Body decays of Fe 
+3    1     # Calc 3-Body decays of Fd 
+Block Y1IN    #  
+ 1 1   1.000000E-02         # Y1(1,1)
+ 1 2   2.000000E-02         # Y1(1,2)
+ 2 1   3.000000E-01         # Y1(2,1)
+ 2 2   5.000000E-05         # Y1(2,2)
+ 3 1   5.000000E-03         # Y1(3,1)
+ 3 2   8.000000E-02         # Y1(3,2)
+Block Y2IN    #  
+ 1 1   1.000000E-02         # Y2(1,1)
+ 1 2   2.000000E-03         # Y2(1,2)
+ 1 3   4.000000E-03         # Y2(1,3)
+ 2 1   5.000000E-01         # Y2(2,1)
+ 2 2   2.000000E-01         # Y2(2,2)
+ 2 3   1.000000E-01         # Y2(2,3)
 Block YXIN    #  
  1 1   1.303988E-01         # YX(1,1)
  1 2   0.000000E+00         # YX(1,2)
- 1 3   0.000000E+00         # YX(1,3)
  2 1   0.000000E+00         # YX(2,1)
  2 2   1.990238E-01         # YX(2,2)
- 2 3   0.000000E+00         # YX(2,3)
- 3 1   0.000000E+00         # YX(3,1)
- 3 2   0.000000E+00         # YX(3,2)
- 3 3   3.137773E-01         # YX(3,3)
+Block BLIN       #  
+ 4   0.000000E+00         # lam4
+ 5   1.000000E-03         # lam5
+ 6   1.000000E-04         # lam6
+ 7   2.000000E-04         # lam7
+ 8   5.000000E-04         # lam8
+ 33   1.000000E-02         # LS
+ 32   2.000000E-01         # LSH
+ 30   1.000000E+02         # LC
+ 28   8.000000E+06         # mEt2
+ 29   8.100000E+06         # MS2
