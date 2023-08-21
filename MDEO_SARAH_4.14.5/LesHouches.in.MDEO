@@ -13,11 +13,21 @@ Block MINPAR      # Input parameters
  1   2.581465E-01    # Lambda1INPUT
  2   3.000000E+00    # Lambda2INPUT
  3   2.1625338E-05    # Lambda3INPUT
- 10   1.000000E-01    # g1pINPUT
+ 4   0.000000E+00    # Lambda4INPUT
+ 5   1.000000E-03     # Lambda5INPUT
+ 6   1.000000E-04    # Lambda6INPUT
+ 7   2.000000E-04      # Lambda7INPUT
+ 8   5.000000E-04    # Lambda8INPUT
+ 10   1.000000E-01   # g1pINPUT
  11   0.000000E+00    # g1p1INPUT
  12   0.000000E+00    # g11pINPUT
- 21   2.499221E+03    # vXinput
- 22   3.500000E+00    # ycinput
+ 20   2.499221E+03    # vXinput
+ 21   1.000000E-01    # ycinput
+ 22   8.000000E+06     # mEt2input
+ 23   8.100000E+06    # MS2input
+ 24   1.000000E-02    # LamSHinput
+ 25   2.000000E-01    # LamSinput
+ 26   1.000000E+02    # lcinput
 Block SPhenoInput   # SPheno specific input 
   1 -1              # error level 
   2  0              # SPA conventions 
@@ -40,8 +50,8 @@ Block SPhenoInput   # SPheno specific input
  38 2               # 1- or 2-Loop RGEs 
  50 1               # Majorana phases: use only positive masses (put 0 to use file with CalcHep/Micromegas!) 
  51 0               # Write Output in CKM basis 
- 52 0               # Write spectrum in case of tachyonic states 
- 55 0               # Calculate loop corrected masses 
+ 52 1               # Write spectrum in case of tachyonic states
+ 55 1               # Calculate loop corrected masses
  57 1               # Calculate low energy constraints 
  60 1               # Include possible, kinetic mixing 
  65 1               # Solution tadpole equation 
@@ -114,14 +124,3 @@ Block YXIN    #
  1 2   0.000000E+00         # YX(1,2)
  2 1   0.000000E+00         # YX(2,1)
  2 2   1.990238E-01         # YX(2,2)
-Block BLIN       #  
- 4   0.000000E+00         # lam4
- 5   1.000000E-03         # lam5
- 6   1.000000E-04         # lam6
- 7   2.000000E-04         # lam7
- 8   5.000000E-04         # lam8
- 33   1.000000E-02         # LS
- 32   2.000000E-01         # LSH
- 30   1.000000E+02         # LC
- 28   8.000000E+06         # mEt2
- 29   8.100000E+06         # MS2

@@ -51,22 +51,27 @@ ParameterDefinitions = {
 
 {L1, {OutputName -> lam1,
       LaTeX -> "\\lambda_1",
+      Real -> True,
       LesHouches -> {BL,1}}},
 
 {L2, {OutputName -> lam2,
       LaTeX -> "\\lambda_2",
+      Real -> True,
       LesHouches -> {BL,2}}},
 
 {L3, {OutputName -> lam3,
       LaTeX -> "\\lambda_3",
+      Real -> True,
       LesHouches -> {BL,3}}},
 
 {L4, {OutputName -> lam4,
       LaTeX -> "\\lambda_4",
+      Real -> True,
       LesHouches -> {BL,4}}},
 
 {L5, {OutputName -> lam5,
       LaTeX -> "\\lambda_5",
+      Real -> True,
       LesHouches -> {BL,5}}},
 
 {L6, {OutputName -> lam6,
@@ -75,10 +80,12 @@ ParameterDefinitions = {
 
 {L7, {OutputName -> lam7,
       LaTeX -> "\\lambda_7",
+      Real -> True,
       LesHouches -> {BL,7}}},
 
 {L8, {OutputName -> lam8,
       LaTeX -> "\\lambda_8",
+      Real -> True,
       LesHouches -> {BL,8}}},
 
 {MuP, {OutputName -> MUP,
@@ -99,10 +106,12 @@ ParameterDefinitions = {
 
 {mEt2, {LaTeX -> "m_{\\eta}^2",
 	LesHouches -> {BL,28},
+	Real -> True,
 	OutputName-> mEt2 }},
 
 {MS2, {LaTeX -> "M_S^2",
        LesHouches -> {BL,29},
+       Real -> True,
 	   OutputName-> MS2}},
 
 {MUS, {OutputName -> muS,
@@ -111,30 +120,37 @@ ParameterDefinitions = {
 
 {yc, {OutputName -> YC,
       LaTeX -> "y_c",
+      Real -> True,
       LesHouches -> {BL,31}}},
 
 {yx,   {LaTeX -> "y_X",
 	LesHouches -> YX,
+	Real -> True,
 	OutputName->YX }},
 
 {lc,     {OutputName ->"LC",
              LaTeX -> "\\lambda_C",
+             Real -> True,
              LesHouches -> {BL,30}}},
 
 {LamSH,     {OutputName ->"LSH",
              LaTeX -> "\\lambda_{SH}",
+             Real -> True,
              LesHouches -> {BL,32}}},
 
 {LamS,     {OutputName ->"LS",
              LaTeX -> "\\lambda_S",
+             Real -> True,
              LesHouches -> {BL,33}}},
 
 {y1, {OutputName -> Y1,
       LaTeX -> "Y_1",
+      Real -> True,
       LesHouches -> Y1}},
 
 {y2, {OutputName -> Y2,
       LaTeX -> "Y_2",
+      Real -> True,
       LesHouches -> Y2}},
 
 {Vu,        {Description ->"Left-Up-Mixing-Matrix"}},
