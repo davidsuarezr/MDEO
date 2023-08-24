@@ -1,27 +1,28 @@
 OnlyLowEnergySPheno = True;
 
 
-MINPAR={{1, Lambda1INPUT},
-        {2, Lambda2INPUT},
-        {3, Lambda3INPUT},
-        {4, Lambda4INPUT},
-        {5, Lambda5INPUT},
-        {6, Lambda6INPUT},
-        {7, Lambda7INPUT},
-        {8, Lambda8INPUT},
-        {10, g1pINPUT},
-        {11, g1p1INPUT},
-        {12, g11pINPUT},
-        {20, vXinput},
-        {21, ycinput},
-        {22, mEt2input},
-        {23, MS2input},
-        {24, LamSHinput},
-        {25, LamSinput},
-        {26, lcinput}
-        };
+MINPAR={  {1,lambda1Input},
+  {2,lambda2Input},
+  {3,lambda3Input},
+  {4,lambda4Input},
+  {5,lambda5Input},
+  {6,lambda6Input},
+  {7,lambda7Input},
+  {8,lambda8Input},
+  {9,lambda9Input},
+  {10,lambda10Input},
+  {11,lambda11Input},
+  {20, g1pINPUT},
+  {21, g1p1INPUT},
+  {22, g11pINPUT},
+  {23, mEt2Input},
+  {24, MS2Input},
+  {30, vXinput},
+  {31, Ycinput},
+  {32, muCinput}
+  };
 
-ParametersToSolveTadpoles = {MuP,mu2};
+ParametersToSolveTadpoles = {MuP,mH2};
 
 DEFINITION[MatchingConditions]= {
  {Ye, YeSM},
@@ -37,28 +38,29 @@ BoundaryLowScaleInput={
  {g1p, g1pINPUT},
  {g11p, g11pINPUT},
  {g1p1, g1p1INPUT},
- {L1, Lambda1INPUT},
- {L2, Lambda2INPUT},
- {L3, Lambda3INPUT},
- {L4, Lambda4INPUT},
- {L5, Lambda5INPUT},
- {L6, Lambda6INPUT},
- {L7, Lambda7INPUT},
- {L8, Lambda8INPUT},
+ {lambda1,lambda1Input},
+ {lambda2,lambda2Input},
+ {lambda3,lambda3Input},
+ {lambda4,lambda4Input},
+ {lambda5,lambda5Input},
+ {lambda6,lambda6Input},
+ {lambda7,lambda7Input},
+ {lambda8,lambda8Input},
+ {lambda9,lambda9Input},
+ {lambda10,lambda10Input},
+ {lambda11,lambda11Input},
  {vX, vXinput},
- {yc, ycinput},
- {yx, LHInput[yx]},
- {y1, LHInput[y1]},
- {y2, LHInput[y2]},
- {mEt2, mEt2input},
- {MS2, MS2input},
- {LamSH, LamSHinput},
- {LamS, LamSinput},
- {lc, lcinput}
+ {Yc, Ycinput},
+ {muC, muCinput},
+ {mEt2,mEt2Input},
+ {MS2,MS2Input},
+ {Yx, LHInput[Yx]},
+ {YnL, LHInput[YnL]},
+ {YnR, LHInput[YnR]}
 };
 
 AddTreeLevelUnitarityLimits=True;
 FlagLoopContributions = True;
 
-ListDecayParticles = {Fu,Fe,Fd, Fv, VZ, VWm, hh, VZp, Chi, Xi, etI, etm, ns};
+ListDecayParticles = {Fu,Fe,Fd, VZ, VWm, hh, VZp, Chi, Xi, etI, etp, ns};
 ListDecayParticles3B = {{Fu,"Fu.f90"},{Fe,"Fe.f90"},{Fd,"Fd.f90"}};
