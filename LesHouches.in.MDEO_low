@@ -14,7 +14,7 @@ BLOCK SMINPUTS
 
 BLOCK MINPAR
    1   1.000000E-01    # lambda1Input
-   2   2.1000000E-02   # lambda2Input
+   2   1.1190000E+03    # MDFInput
    3   3.000000E-01    # lambda3Input
    4   4.000000E-02    # lambda4Input
    5   3.000000E-03    # lambda5Input
