@@ -21,15 +21,15 @@ Block MINPAR      # Input parameters
  8   3.000000E-02    # lambda8Input
  9   3.000000E-02    # lambda9Input
  10   1.000000E-01    # lambda10Input
- 11   2.000000E-00    # lambda11Input
- 20   1.000000E-01    # g1pINPUT
+ 11   2.000000E-01    # lambda11Input
+ 20   1.100000E-01    # g1pINPUT
  21   0.000000E+00    # g1p1INPUT
  22   0.000000E+00    # g11pINPUT
- 23   2.000000E+08    # mEt2Input
- 24   1.000000E+08    # MS2Input
- 30   2.000000E+06    # vXinput
- 31   1.000000E-02    # Ycinput
- 32   2.000000E-02    # muCinput
+ 23   2.000000E+06    # mEt2Input
+ 24   1.000000E+06    # MS2Input
+ 30   1.000000E+03    # vXinput
+ 31   1.000000E-01    # Ycinput
+ 32   3.000000E-02    # muCinput
 Block SPhenoInput   # SPheno specific input 
   1 -1              # error level 
   2  0              # SPA conventions 
