@@ -40,6 +40,7 @@ ParticleDefinitions[GaugeES] = {
                  Width -> Automatic, 
                  Mass ->LesHouches,
                  FeynArtsNr -> 1,
+                 ElectricCharge -> 0,
                  LaTeX -> "h",
                  OutputName -> "h" }}, 
                  
@@ -48,6 +49,7 @@ ParticleDefinitions[GaugeES] = {
                  Width -> {0, External}, 
                  Mass ->LesHouches,
                  FeynArtsNr -> 2,
+                 ElectricCharge -> 0,
                  LaTeX -> "A_h",
                  OutputName -> "Ah" }},                      
       
@@ -66,7 +68,7 @@ ParticleDefinitions[GaugeES] = {
       			 Goldstone -> Ah[{1}] }}, 
       {VG,   { Description -> "Gluon" }},          
       {VWm,  { Description -> "W-Boson",
-                Goldstone->Hp }},
+                Goldstone-> conj[Hp] }},
       {gP,   { Description -> "Photon Ghost"}},                                                   
       {gWm,  { Description -> "Negative W-Boson Ghost"}}, 
       {gWmC, { Description -> "Positive W-Boson Ghost" }}, 
