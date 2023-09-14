@@ -140,8 +140,8 @@ def buildSLHAinFile():
  
     #Block YXIN    #  
     LHA.blocks['YXIN'].entries[1,1]='   1.000000E-01         # YX(1,1)'
-    LHA.blocks['YXIN'].entries[1,2]='   0.000000E-03         # YX(1,2)'
-    LHA.blocks['YXIN'].entries[2,1]='   0.000000E-03         # YX(2,1)'
+    LHA.blocks['YXIN'].entries[1,2]='   1.000000E-03         # YX(1,2)'
+    LHA.blocks['YXIN'].entries[2,1]='   1.000000E-03         # YX(2,1)'
     LHA.blocks['YXIN'].entries[2,2]='   3.000000E-01         # YX(2,2)'
     ################################################################
 

@@ -13,8 +13,8 @@ BLOCK SMINPUTS
    7   1.776690E+00    # m_tau(pole)
 
 BLOCK MINPAR
-   1   2.400000E-01    # lambda1Input
-   2   2.000000E-02    # lambda2Input
+   1   2.225000E-01    # lambda1Input
+   2   2.100000E-02    # lambda2Input
    3   3.000000E-02    # lambda3Input
    4   4.000000E-02    # lambda4Input
    5   3.000000E-03    # lambda5Input
@@ -27,11 +27,11 @@ BLOCK MINPAR
    20   1.000000E-01    # g1pINPUT
    21   0.000000E+00    # g1p1INPUT
    22   0.000000E+00    # g11pINPUT
-   23   4.000000E+08    # mEt2Input
-   24   4.000000E+08    # MS2Input
-   30   5.000000E+03    # vXinput
+   23   4.030000E+08    # mEt2Input
+   24   4.020000E+08    # MS2Input
+   30   5.200000E+03    # vXinput
    31   2.000000E-01    # Ycinput
-   32   4.000000E+02    # muCinput
+   32   4.110000E+02    # muCinput
 
 BLOCK SPHENOINPUT
    1   -1            # error level
@@ -56,7 +56,7 @@ BLOCK SPHENOINPUT
    50   0               # Majorana phases: use only positive masses (put 0 to use file with CalcHep/Micromegas!)
    51   0               # Write Output in CKM basis
    52   1               # Write spectrum in case of tachyonic states
-   55   1           # Calculate loop corrected masses
+   55   0               # Calculate loop corrected masses
    57   1               # Calculate low energy constraints
    60   1               # Include possible, kinetic mixing 
    65   1               # Solution tadpole equation
@@ -129,7 +129,7 @@ BLOCK YNRIN
    2   3      1.000000E-03         # YnR(2,3)
 
 BLOCK YXIN
-   1   1      1.000000E-01         # YX(1,1)
-   1   2      0.000000E-03         # YX(1,2)
-   2   1      0.000000E-03         # YX(2,1)
-   2   2      3.000000E-01         # YX(2,2)
+   1   1   1.100000E-01    # YX(1,1)
+   1   2   1.100000E-03    # YX(1,2)
+   2   1   2.000000E-02    # YX(2,1)
+   2   2   3.200000E-01    # YX(2,2)
