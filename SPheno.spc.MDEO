@@ -25,7 +25,7 @@
 #  
 # in case of problems send email to goodsell@lpthe.jussieu.fr and porod@physik.uni-wuerzburg.de, or consult the forum/wiki 
 # ----------------------------------------------------------------------
-# Created: 14.09.2023,  18:14
+# Created: 15.09.2023,  16:04
 Block SPINFO         # Program information
      1   SPhenoSARAH      # spectrum calculator
      2   v4.0.5      # version number of SPheno

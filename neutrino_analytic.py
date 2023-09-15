@@ -3,17 +3,16 @@
 import numpy as np
 import pandas as pd
 
-def MATRIXCHIDIAG(MDF,vS,YRC,YRD):    
+## Fermion diagonalization
+def MATFermionXi(YX11,YX12,YX21,YX22,vX):
     
     dcOut={}
     
-    #Diagonalization of Mchi matrix by the bi-unitary transfortion V and U
-    vevSM = 244.874425 #Warning
-    MX0 = np.matrix( [[MDF,vevSM*YRD/np.sqrt(2.)],[0.0,vS*YRC/np.sqrt(2.)]])
-    #squared eigenvalues e eigenvectors for the V MATRIX
-    (MVdiag2,V)=np.linalg.eig(MX0*np.transpose(MX0))
-    #squared eigenvalues e eigenvectors for the U MATRIX
-    (MUdiag2,U)=np.linalg.eig(np.transpose(MX0)*MX0)
+    MF = (-vX/np.sqrt(2.))*np.matrix([[YX11,YX12],[YX21,YX22]])
+
+    (MVdiag2,V)=np.linalg.eig(MF*np.transpose(MF))
+
+    (MUdiag2,U)=np.linalg.eig(np.transpose(MF)*MF)
     
     if np.sqrt(np.abs(MVdiag2[0])) < np.sqrt(np.abs(MVdiag2[1])):
         
@@ -54,7 +53,43 @@ def MATRIXCHIDIAG(MDF,vS,YRC,YRD):
             
     return dcOut
 
-#Loop factor
+### Scalar diagonalization
+def MATSalarS0(l3,l4,l7,l9,l10,vX,VEV,muC,MS2,Mn2):
+    
+    dcOut={}
+    
+    MS = np.matrix([[0.5*((l3+l4)*VEV**2 + l7*vX**2) + Mn2, -0.5*VEV*muC],[-0.5*VEV*muC, 0.5*(l10*vX**2+l9*VEV**2) + MS2]])
+
+    (MVdiag2,V)=np.linalg.eig(MS)
+    
+    if np.abs(MVdiag2[0]) < np.abs(MVdiag2[1]):
+        
+        M1=np.sqrt(np.abs(MVdiag2[0]))
+        M2=np.sqrt(np.abs(MVdiag2[1]))
+        V11=V[0,0]
+        V12=V[0,1]
+        V21=V[1,0]
+        V22=V[1,1]
+        
+    else:
+        
+        M1=np.sqrt(np.abs(MVdiag2[1]))
+        M2=np.sqrt(np.abs(MVdiag2[0]))
+        V11=V[1,0]
+        V12=V[1,1]
+        V21=V[0,0]
+        V22=V[0,1]
+    
+    dcOut['M1']= M1
+    dcOut['M2']= M2  
+    dcOut['V11']= V11 
+    dcOut['V12']= V12 
+    dcOut['V21']= V21 
+    dcOut['V22']= V22 
+            
+    return dcOut
+
+##### Loop factor
 def fk(ms,ml):
     fk = (1./(4.*np.pi)**2)*(ms**2*np.log(ms**2)-ml**2*np.log(ml**2))/(ms**2-ml**2)
     return fk   
