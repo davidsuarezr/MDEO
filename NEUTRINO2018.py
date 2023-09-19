@@ -2,9 +2,6 @@
 
 import numpy as np
 import pandas as pd
-import subprocess
-import time
-import sys
 
 #PMNS matrix 2018 to 3\sigma https://arxiv.org/abs/1708.01186
 def nuexpvalues():   
@@ -19,7 +16,7 @@ def nuexpvalues():
     #light neutrino masses (up 3 sigma range) NH (NO)
     #mnu1 = 10**((np.log10(2.5e-3)-np.log10(1e-9))*np.random.uniform(0,1)+np.log10(1e-9))*1e-9 
     #Zero in this framework
-    mnu1 = 1.0e-20
+    mnu1 = 1.0e-25
     mnu2 = np.sqrt(np.random.uniform(7.05e-5,8.14e-5)*1.0e-18+mnu1**2)
     mnu3 = np.sqrt(np.random.uniform(2.41e-3,2.60e-3)*1.0e-18+mnu1**2)
 
@@ -35,16 +32,7 @@ def nuexpvalues():
     Uphases = np.array([ [np.exp(eta1*1j),0.,0.], [0.,np.exp(eta2*1j),0.], [0.,0.,1.0] ])
     U=np.dot(UM23,np.dot(UM13,np.dot(UM12,Uphases)))
 
-    #Defining the U elementes. readeable
-    #U11 = np.real(U[0,0])
-    #U12 = np.real(U[0,1])
-    #U13 = np.real(U[0,2])
-    #U21 = np.real(U[1,0])
-    #U22 = np.real(U[1,1])
-    #U23 = np.real(U[1,2])
-    #U31 = np.real(U[2,0])
-    #U32 = np.real(U[2,1])
-    #U33 = np.real(U[2,2])
+    #Defining the U elementes.
 
     dcOut['mnu1']= mnu1
     dcOut['mnu2']= mnu2
