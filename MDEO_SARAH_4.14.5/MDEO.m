@@ -35,8 +35,8 @@ FermionFields[[8]] = {CR, 1, conj[cr],     0, 1,  1,  5, -1,  1};
 FermionFields[[9]] = {FxL, 2,       xl,    0, 1,  1, 10,  1, -1};
 FermionFields[[10]] = {FxR, 2, conj[xr],   0, 1,  1, -1,  1, -1};
 
-ScalarFields[[1]] =  {H,  1,  {Hp, H0},  1/2, 2, 1,  0, 1,  1};
-ScalarFields[[2]] =  {Et, 1, {etp,et0},  1/2, 2, 1,  1, 1, -1};
+ScalarFields[[1]] =  {H, 1,   {H0, Hm}, -1/2, 2, 1,  0, 1,  1};
+ScalarFields[[2]] = {Et, 1, {et0, etm}, -1/2, 2, 1, -1, 1, -1};
 ScalarFields[[3]] = {bi, 1,        BiD,    0, 1, 1, -9, 1,  1};
 ScalarFields[[4]] =  {S, 1,         ss,    0, 1, 1, -1, 1, -1};
 
@@ -63,7 +63,7 @@ DEFINITION[GaugeES][Additional]= {
     {LagSEt  ,      {AddHC->False}}
 };
 
-LagFer   = Yd conj[H].d.q + Ye conj[H].e.l + Yu H.u.q + YnL Et.FxR.l + YnR S.FxL.v + Yc bi.CL.CR + Yx bi.FxL.FxR;
+LagFer   = Yd H.d.q + Ye H.e.l + Yu conj[H].u.q + YnL conj[Et].FxR.l + YnR S.FxL.v + Yc bi.CL.CR + Yx bi.FxL.FxR;
 
 LagSca   = muC conj[H].Et.S;
 

@@ -62,5 +62,5 @@ BoundaryLowScaleInput={
 AddTreeLevelUnitarityLimits=True;
 FlagLoopContributions = True;
 
-ListDecayParticles = {Fu,Fe,Fd, VZ, VWm, hh, VZp, Chi, Xi, etI, etp, ns};
+ListDecayParticles = {Fu,Fe,Fd, VZ, VWm, hh, VZp, Chi, Xi, etI, etm, ns};
 ListDecayParticles3B = {{Fu,"Fu.f90"},{Fe,"Fe.f90"},{Fd,"Fd.f90"}};
