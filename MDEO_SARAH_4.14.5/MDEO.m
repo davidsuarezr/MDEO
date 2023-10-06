@@ -65,7 +65,7 @@ DEFINITION[GaugeES][Additional]= {
 
 LagFer   = Yd H.d.q + Ye H.e.l + Yu conj[H].u.q + YnL conj[Et].FxR.l + YnR S.FxL.v + Yc bi.CL.CR + Yx bi.FxL.FxR;
 
-LagSca   = muC conj[H].Et.S;
+LagSca   = muC conj[H].Et.conj[S];
 
 LagH     = -(- mH2 conj[H].H + 1/2 lambda1 conj[H].H.conj[H].H );
 
