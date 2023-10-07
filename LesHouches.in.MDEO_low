@@ -56,7 +56,7 @@ BLOCK SPHENOINPUT
    50   0               # Majorana phases: use only positive masses (put 0 to use file with CalcHep/Micromegas!)
    51   0               # Write Output in CKM basis
    52   1               # Write spectrum in case of tachyonic states
-   55   1               # Calculate loop corrected masses
+   55   0               # Calculate loop corrected masses
    57   1               # Calculate low energy constraints
    60   1               # Include possible, kinetic mixing 
    65   1               # Solution tadpole equation
@@ -114,19 +114,19 @@ BLOCK DECAYOPTIONS
 
 BLOCK YNLIN
    1   1   0.000000E+00    # YnL(1,1)
-   1   2   1.727561E-03    # YnL(1,2)
-   1   3   1.451413E-04    # YnL(1,3)
+   1   2   3.527758E-03    # YnL(1,2)
+   1   3   1.657160E-01    # YnL(1,3)
    2   1   0.000000E+00    # YnL(2,1)
-   2   2   4.894630E-03    # YnL(2,2)
-   2   3   2.800414E-02    # YnL(2,3)
+   2   2   3.065926E-02    # YnL(2,2)
+   2   3   2.781889E-02    # YnL(2,3)
 
 BLOCK YNRIN
-   1   1   6.093307E-06    # YnR(1,1)
-   1   2   -2.917146E-06    # YnR(1,2)
-   1   3   -2.124280E-05    # YnR(1,3)
-   2   1   2.787678E-07    # YnR(2,1)
-   2   2   1.358095E-06    # YnR(2,2)
-   2   3   1.406604E-06    # YnR(2,3)
+   1   1   6.120821E-08    # YnR(1,1)
+   1   2   5.583140E-07    # YnR(1,2)
+   1   3   7.708244E-07    # YnR(1,3)
+   2   1   1.579697E-07    # YnR(2,1)
+   2   2   1.424978E-07    # YnR(2,2)
+   2   3   -2.194551E-07    # YnR(2,3)
 
 BLOCK YXIN
    1   1   1.100000E-01    # YX(1,1)
