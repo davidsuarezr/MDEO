@@ -173,8 +173,8 @@ def MATRIXDIAG(ZL11,ZL12,ZL21,ZL22,ZR11,ZR12,ZR21,ZR22,ZN11,ZN12,ZN21,ZN22,YnL11
     return mn1, mn2, mn3
 
 #run all dataframe
-MatrixDiag_new=np.vectorize(MATRIXDIAG,excluded={'vev':246.2,'LAMBDA':1E16},doc='Input for pyfunc below:\
-			    YB11,YB12,YB13,YB21,YB22,YB23,YA11,YA12,YA13,YA21,YA22,YA23,mS1,mS2,MDF,vS,YRC,YRD')
+MatrixDiag_new=np.vectorize(MATRIXDIAG,doc='Input for pyfunc below:ZL11,ZL12,ZL21,ZL22,ZR11,ZR12,ZR21,ZR22,ZN11,ZN12,ZN21,ZN22,YnL11,YnL12,YnL13,YnL21,YnL22,YnL23,\
+    YnR11,YnR12,YnR13,YnR21,YnR22,YnR23,mXi_1,mXi_2,mns_1,mns_2')
 
 #PMNS matrix 2018 to 3\sigma https://arxiv.org/abs/1708.01186
 def nuexpvalues():   
