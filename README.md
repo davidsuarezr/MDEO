@@ -7,3 +7,7 @@ Model_for_dark_matter_and_Dirac_neutrino_masses_with_an_extra_Abelian_gauge_symm
 3. DM annihilation into two dark photons computed in FeynCalc, FormCalc, FeynArts and Mathematica
 4. Micromegas version: micromegas_5.0.6
 5. 
+
+Run:
+1. python3 random_general_scan.py 20 2
+2. ./recover_general_scan.sh
