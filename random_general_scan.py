@@ -148,7 +148,8 @@ for i in range(0,Num):
     
     #print('before SPHENO')
     #run SPheno
-    spheno = subprocess.getoutput('~/Downloads/Tesis/Automatic_Submodules_MDEO/SPHENO/bin/SPhenoMDEO LesHouches.in.MDEO_low')
+    #spheno = subprocess.getoutput('~/Downloads/Tesis/Automatic_Submodules_MDEO/SPHENO/bin/SPhenoMDEO LesHouches.in.MDEO_low')
+    spheno = subprocess.getoutput('../.././SPheno-4.0.5/bin/SPhenoMDEO LesHouches.in.MDEO_low')
     so = subprocess.getoutput('cat SPheno.spc.MDEO')
     
     T = eval(so.split('Block SPhenoLowEnergy #')[1].split()[4])
@@ -158,7 +159,8 @@ for i in range(0,Num):
     
     #print('before micromegas')    
     #run micromegas.
-    mo = subprocess.getoutput('~/Downloads/Tesis/Automatic_Submodules_MDEO/micromegas/MDEO/CalcOmega_with_DI_Detection') #with_direct_detection
+    #mo = subprocess.getoutput('~/Downloads/Tesis/Automatic_Submodules_MDEO/micromegas/MDEO/CalcOmega_with_DI_Detection') #with_direct_detection
+    mo = subprocess.getoutput('~/Work/micromegas_5.0.6/MDEO/./CalcOmega_with_DI_Detection')#with_direct_detection
     
     if len(mo.split()) == 2:
         continue
