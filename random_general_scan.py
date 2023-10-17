@@ -25,7 +25,10 @@ for i in range(0,Num):
     xdict = pyMDEO_LesHouches_generator.buildSLHAinFile()
 
     #Random parameters
+    g1=3.55690247E-01
     g1p = np.exp(np.random.uniform(np.log(10**(-3)),np.log(10**(0)))) #U1 coupling
+    epsilon = np.exp(np.random.uniform(np.log(10**(-6)),np.log(10**(-2)))) #U1 coupling
+    g1p1=-g1*epsilon/np.sqrt(1.0-epsilon**2.0)
     MZp = np.exp(np.random.uniform(np.log(9.6e1),np.log(5.0e2)))
     vX = MZp/(9.0*g1p)
     VEV = 246.220569
@@ -63,6 +66,7 @@ for i in range(0,Num):
     xdict.blocks['MINPAR'].entries[10]='%.6E    # lambda10Input'%Lam10
     xdict.blocks['MINPAR'].entries[11]='%.6E    # lambda11Input'%Lam11
     xdict.blocks['MINPAR'].entries[20]='%.6E    # g1pINPUT'%g1p
+    xdict.blocks['MINPAR'].entries[21]='%.6E    # g1p1INPUT'%g1p1
     xdict.blocks['MINPAR'].entries[23]='%.6E    # mEt2Input'%Mn2
     xdict.blocks['MINPAR'].entries[24]='%.6E    # MS2Input'%MS2
     xdict.blocks['MINPAR'].entries[30]='%.6E    # vXinput'%vX
@@ -144,7 +148,7 @@ for i in range(0,Num):
     
     #print('before SPHENO')
     #run SPheno
-    spheno = subprocess.getoutput('../.././SPheno-4.0.5/bin/SPhenoMDEO LesHouches.in.MDEO_low')
+    spheno = subprocess.getoutput('~/Downloads/Tesis/Automatic_Submodules_MDEO/SPHENO/bin/SPhenoMDEO LesHouches.in.MDEO_low')
     so = subprocess.getoutput('cat SPheno.spc.MDEO')
     
     T = eval(so.split('Block SPhenoLowEnergy #')[1].split()[4])
@@ -154,7 +158,7 @@ for i in range(0,Num):
     
     #print('before micromegas')    
     #run micromegas.
-    mo = subprocess.getoutput('~/Work/micromegas_5.0.6/MDEO/./CalcOmega_with_DI_Detection')#with_direct_detection
+    mo = subprocess.getoutput('~/Downloads/Tesis/Automatic_Submodules_MDEO/micromegas/MDEO/CalcOmega_with_DI_Detection') #with_direct_detection
     
     if len(mo.split()) == 2:
         continue
@@ -170,7 +174,7 @@ for i in range(0,Num):
     SIN2= eval(mo.split('CDM2-nucleon cross sections[pb]:')[1].split()[7])
     sv = eval(mo.split('CDM2-nucleon cross sections[pb]:')[1].split()[7])
     
-    x.append([Lam1,Lam2,Lam3,Lam4,Lam5,Lam6,Lam7,Lam8,Lam9,Lam10,Lam11,MS2,Mn2,vX,Yc,VEV,muC,g1p,\
+    x.append([Lam1,Lam2,Lam3,Lam4,Lam5,Lam6,Lam7,Lam8,Lam9,Lam10,Lam11,MS2,Mn2,vX,Yc,VEV,muC,g1p,g1p1,epsilon,\
               ZL11,ZL12,ZL21,ZL22,ZR11,ZR12,ZR21,ZR22,\
           ZN11,ZN12,ZN21,ZN22,mXi_1,mXi_2,mns_1,mns_2,YnL11,YnL12,YnL13,YnL21,YnL22,YnL23,\
           YnR11,YnR12,YnR13,YnR21,YnR22,YnR23,Omega1,Omega2,SIN1,SIN2,sv,MZp,mh1,mh2,theta,thetaf,T,S,U,g2mu])
@@ -178,7 +182,7 @@ for i in range(0,Num):
 x=np.asarray(x)
 
 xd=pd.DataFrame(x,columns=['Lam1','Lam2','Lam3','Lam4','Lam5','Lam6','Lam7','Lam8','Lam9','Lam10',\
-                           'Lam11','MS2','Mn2','vX','Yc','VEV','muC','g1p',\
+                           'Lam11','MS2','Mn2','vX','Yc','VEV','muC','g1p','g1p1','epsilon',\
                            'ZL11','ZL12','ZL21','ZL22','ZR11','ZR12','ZR21','ZR22','ZN11','ZN12','ZN21',\
                            'ZN22','mXi_1','mXi_2','mns_1','mns_2','YnL11','YnL12','YnL13','YnL21','YnL22',\
                            'YnL23','YnR11','YnR12','YnR13','YnR21','YnR22','YnR23','Omega1','Omega2',\
