@@ -27,11 +27,13 @@ for i in range(0,Num):
     #Random parameters
     g1=3.55690247E-01
     g1p = np.exp(np.random.uniform(np.log(10**(-3)),np.log(10**(0)))) #U1 coupling
-    epsilon = np.exp(np.random.uniform(np.log(10**(-6)),np.log(10**(-2)))) #U1 coupling
-    g1p1=-g1*epsilon/np.sqrt(1.0-epsilon**2.0)
-    MZp = np.exp(np.random.uniform(np.log(9.6e1),np.log(5.0e2)))
-    vX = MZp/(9.0*g1p)
+    epsilon = np.exp(np.random.uniform(np.log(10**(-6)),np.log(10**(-2))))
+    g1p1 = 0.
+    g11p = -g1*epsilon
+    MZp = np.exp(np.random.uniform(np.log(9.6e1),np.log(5.0e2))) 
+    vX = MZp*(1.+epsilon**2)/(9.0*g1p)  #WARNING
     VEV = 246.220569
+    
     theta = np.exp(np.random.uniform(np.log(1.0e-6),np.log(1.0e-3)))
     gamma = 1.0/np.sqrt(1.0+np.tan(2.0*theta)**2.0)
     
@@ -67,6 +69,7 @@ for i in range(0,Num):
     xdict.blocks['MINPAR'].entries[11]='%.6E    # lambda11Input'%Lam11
     xdict.blocks['MINPAR'].entries[20]='%.6E    # g1pINPUT'%g1p
     xdict.blocks['MINPAR'].entries[21]='%.6E    # g1p1INPUT'%g1p1
+    xdict.blocks['MINPAR'].entries[22]='%.6E    # g11pINPUT'%g11p
     xdict.blocks['MINPAR'].entries[23]='%.6E    # mEt2Input'%Mn2
     xdict.blocks['MINPAR'].entries[24]='%.6E    # MS2Input'%MS2
     xdict.blocks['MINPAR'].entries[30]='%.6E    # vXinput'%vX
