@@ -76,12 +76,12 @@ for i in range(0,Num):
     xdict.blocks['MINPAR'].entries[31]='%.6E    # Ycinput'%Yc
     xdict.blocks['MINPAR'].entries[32]='%.6E    # muCinput'%muC
     
-    mc = Yc*vX/np.sqrt(2.)
+    mChi = Yc*vX/np.sqrt(2.)
     
-    if mc < MZp:
+    if mChi < MZp:
         continue
     
-    MX1 = mc+np.exp(np.random.uniform(np.log(1.0),np.log(1.0e3)))
+    MX1 = mChi+np.exp(np.random.uniform(np.log(1.0),np.log(1.0e3)))
     MX2 = MX1+np.exp(np.random.uniform(np.log(1.0),np.log(1.0e3)))
     thetaf = np.exp(np.random.uniform(np.log(1.0e-3),np.log(2.0*np.pi)))
     gammaf = 1.0/np.sqrt(1.0+np.tan(2.0*thetaf)**2.0)
@@ -159,6 +159,8 @@ for i in range(0,Num):
     S = eval(so.split('Block SPhenoLowEnergy #')[1].split()[10])
     U = eval(so.split('Block SPhenoLowEnergy #')[1].split()[16])
     g2mu = eval(so.split('Block SPhenoLowEnergy #')[1].split()[26])
+    TWpSPheno = eval(so.split('Block ANGLES Q')[1].split()[6])
+    MZpSPheno = eval(so.split('# VWm')[1].split()[1])
     
     #print('before micromegas')    
     #run micromegas.
@@ -179,19 +181,22 @@ for i in range(0,Num):
     SIN2= eval(mo.split('CDM2-nucleon cross sections[pb]:')[1].split()[7])
     sv = eval(mo.split('CDM2-nucleon cross sections[pb]:')[1].split()[7])
     
-    x.append([Lam1,Lam2,Lam3,Lam4,Lam5,Lam6,Lam7,Lam8,Lam9,Lam10,Lam11,MS2,Mn2,vX,Yc,VEV,muC,g1p,g1p1,epsilon,\
+    x.append([Lam1,Lam2,Lam3,Lam4,Lam5,Lam6,Lam7,Lam8,Lam9,Lam10,Lam11,MS2,Mn2,vX,Yc,muC,g1p,epsilon,\
               ZL11,ZL12,ZL21,ZL22,ZR11,ZR12,ZR21,ZR22,\
           ZN11,ZN12,ZN21,ZN22,mXi_1,mXi_2,mns_1,mns_2,YnL11,YnL12,YnL13,YnL21,YnL22,YnL23,\
-          YnR11,YnR12,YnR13,YnR21,YnR22,YnR23,Omega1,Omega2,SIN1,SIN2,sv,MZp,mh1,mh2,theta,thetaf,T,S,U,g2mu])
+          YnR11,YnR12,YnR13,YnR21,YnR22,YnR23,Omega1,Omega2,SIN1,SIN2,sv,MZp,mh1,mh2,theta,thetaf,T,S,U,\
+              g2mu,mChi,TWpSPheno,MZpSPheno])
 
 x=np.asarray(x)
 
-xd=pd.DataFrame(x,columns=['Lam1','Lam2','Lam3','Lam4','Lam5','Lam6','Lam7','Lam8','Lam9','Lam10',\
-                           'Lam11','MS2','Mn2','vX','Yc','VEV','muC','g1p','g1p1','epsilon',\
-                           'ZL11','ZL12','ZL21','ZL22','ZR11','ZR12','ZR21','ZR22','ZN11','ZN12','ZN21',\
-                           'ZN22','mXi_1','mXi_2','mns_1','mns_2','YnL11','YnL12','YnL13','YnL21','YnL22',\
-                           'YnL23','YnR11','YnR12','YnR13','YnR21','YnR22','YnR23','Omega1','Omega2',\
-                           'SIN1','SIN2','sv','MZp','mh1','mh2','theta','thetaf','T','S','U','g2mu'])
+xd=pd.DataFrame(x,columns=['Lam1','Lam2','Lam3','Lam4','Lam5','Lam6','Lam7','Lam8','Lam9',\
+                           'Lam10','Lam11','MS2','Mn2','vX','Yc','muC','g1p','epsilon',\
+                           'ZL11','ZL12','ZL21','ZL22','ZR11','ZR12','ZR21','ZR22','ZN11',\
+                           'ZN12','ZN21','ZN22','mXi_1','mXi_2','mns_1','mns_2','YnL11',\
+                           'YnL12','YnL13','YnL21','YnL22','YnL23','YnR11','YnR12','YnR13',\
+                           'YnR21','YnR22','YnR23','Omega1','Omega2','SIN1','SIN2','sv',\
+                           'MZp','mh1','mh2','theta','thetaf','T','S','U','g2mu','mChi',\
+                           'TWpSPheno','MZpSPheno'])
 
 #argv[2] will be the number in the end of the file extension: example: xd_scan1.csv
 xd.to_csv('xd_scan-general-'+sys.argv[2]+'.csv')
