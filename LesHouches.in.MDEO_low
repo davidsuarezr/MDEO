@@ -14,24 +14,24 @@ BLOCK SMINPUTS
 
 BLOCK MINPAR
    1   2.581463E-01    # lambda1Input
-   2   1.538130E-04    # lambda2Input
-   3   1.342966E-01    # lambda3Input
-   4   3.850399E-03    # lambda4Input
-   5   2.021574E-01    # lambda5Input
-   6   7.013323E-06    # lambda6Input
-   7   1.063844E-03    # lambda7Input
-   8   3.127744E-04    # lambda8Input
-   9   9.381775E-03    # lambda9Input
-   10   1.248887E-04    # lambda10Input
-   11   8.497898E-02    # lambda11Input
-   20   7.323954E-03    # g1pINPUT
+   2   3.062605E-01    # lambda2Input
+   3   6.993979E-03    # lambda3Input
+   4   8.771792E-03    # lambda4Input
+   5   6.272140E+02    # lambda5Input
+   6   7.421748E-04    # lambda6Input
+   7   8.316156E-02    # lambda7Input
+   8   9.128580E-04    # lambda8Input
+   9   4.784367E-04    # lambda9Input
+   10   1.156682E-04    # lambda10Input
+   11   2.251836E-03    # lambda11Input
+   20   3.014443E-01    # g1pINPUT
    21   0.000000E+00    # g1p1INPUT
-   22   -5.098189E-07    # g11pINPUT
-   23   3.370496E+07    # mEt2Input
-   24   7.526907E+07    # MS2Input
-   30   3.026068E+03    # vXinput
-   31   9.455625E-02    # Ycinput
-   32   1.436469E+03    # muCinput
+   22   -4.795314E-07    # g11pINPUT
+   23   2.028672E+07    # mEt2Input
+   24   5.704704E+06    # MS2Input
+   30   9.278135E+01    # vXinput
+   31   4.647382E-01    # Ycinput
+   32   3.653103E+02    # muCinput
 
 BLOCK SPHENOINPUT
    1   -1            # error level
@@ -114,22 +114,22 @@ BLOCK DECAYOPTIONS
 
 BLOCK YNLIN
    1   1   0.000000E+00    # YnL(1,1)
-   1   2   1.631352E-01    # YnL(1,2)
-   1   3   3.196005E-03    # YnL(1,3)
+   1   2   1.361752E-01    # YnL(1,2)
+   1   3   2.724866E-04    # YnL(1,3)
    2   1   0.000000E+00    # YnL(2,1)
-   2   2   1.313097E-04    # YnL(2,2)
-   2   3   2.390149E-02    # YnL(2,3)
+   2   2   8.322362E-02    # YnL(2,2)
+   2   3   7.266285E-04    # YnL(2,3)
 
 BLOCK YNRIN
-   1   1   -3.700933E-09    # YnR(1,1)
-   1   2   -3.044571E-09    # YnR(1,2)
-   1   3   3.850650E-09    # YnR(1,3)
-   2   1   -1.832785E-08    # YnR(2,1)
-   2   2   -8.204282E-08    # YnR(2,2)
-   2   3   -8.934329E-08    # YnR(2,3)
+   1   1   -1.052171E-05    # YnR(1,1)
+   1   2   -4.572583E-05    # YnR(1,2)
+   1   3   -4.991806E-05    # YnR(1,3)
+   2   1   1.298203E-05    # YnR(2,1)
+   2   2   5.625187E-05    # YnR(2,2)
+   2   3   6.128429E-05    # YnR(2,3)
 
 BLOCK YXIN
-   1   1   1.897524E-01    # YX(1,1)
-   1   2   6.175755E-02    # YX(1,2)
-   2   1   6.175755E-02    # YX(2,1)
-   2   2   3.850056E-01    # YX(2,2)
+   1   1   4.893965E-01    # YX(1,1)
+   1   2   2.649208E-03    # YX(1,2)
+   2   1   2.649208E-03    # YX(2,1)
+   2   2   6.519432E-01    # YX(2,2)
