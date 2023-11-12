@@ -38,7 +38,7 @@ for i in range(0,Num):
     gamma = 1.0/np.sqrt(1.0+np.tan(2.0*theta)**2.0)
     
     mh1=125.1
-    mh2= np.exp(np.random.uniform(mh1,np.log(5.0e3))) #WARNING
+    mh2= np.exp(np.random.uniform(np.log(mh1),np.log(5.0e3))) #WARNING
     Lam1=(0.5/VEV**2.0)*(mh1**2.0+mh2**2.0-gamma*(mh2**2.0-mh1**2.0))
     
     Lam2 = np.exp(np.random.uniform(np.log(10**(-4)),np.log(10**(0)))) #conj[Et].Et.conj[Et].Et
