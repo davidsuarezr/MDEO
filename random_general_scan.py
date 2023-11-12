@@ -38,7 +38,7 @@ for i in range(0,Num):
     gamma = 1.0/np.sqrt(1.0+np.tan(2.0*theta)**2.0)
     
     mh1=125.1
-    mh2= np.exp(np.random.uniform(np.log(1.0e3),np.log(5.0e3)))
+    mh2= np.exp(np.random.uniform(mh1,np.log(5.0e3))) #WARNING
     Lam1=(0.5/VEV**2.0)*(mh1**2.0+mh2**2.0-gamma*(mh2**2.0-mh1**2.0))
     
     Lam2 = np.exp(np.random.uniform(np.log(10**(-4)),np.log(10**(0)))) #conj[Et].Et.conj[Et].Et
@@ -130,6 +130,10 @@ for i in range(0,Num):
     ZN22 = YUKS['ZN22']
     mns_1 = YUKS['mns_1']
     mns_2 = YUKS['mns_2']
+    
+    #No scalar DM
+    if mns_1 < mChi or mns_1 < mXi_1:
+        continue
 
     ##hdij->YnLij
     xdict.blocks['YNLIN'].entries[1,1]='%.6E    # YnL(1,1)'%YnL11
