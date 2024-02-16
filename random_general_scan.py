@@ -178,7 +178,7 @@ for i in range(0,Num):
     Omega2 = eval(mo.split('Omega_2h^2=')[1].split()[0])
     #print("i=",i,"Omega1=",Omega1,"Omega2=",Omega2)
     
-    if Omega1+Omega2 > 0.1236:
+    if Omega1+Omega2 > 0.132:
         continue
     
     SIN1= eval(mo.split('CDM1-nucleon cross sections[pb]:')[1].split()[7])
