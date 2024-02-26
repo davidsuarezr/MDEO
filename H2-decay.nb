@@ -1,0 +1,126 @@
+(* ::Package:: *)
+
+(* :Title: Z'->lRlR													*)
+
+(*
+	This software is covered by the GNU General Public License 3.
+	Copyright (C) 1990-2020 Rolf Mertig
+	Copyright (C) 1997-2020 Frederik Orellana
+	Copyright (C) 2014-2020 Vladyslav Shtabovenko
+*)
+
+(* :Summary:  H2\[Rule]ZpZp, Dark U1 model, matrix element squared, tree			*)
+
+(* ------------------------------------------------------------------------ *)
+
+
+
+(* ::Title:: *)
+(*Higgs Decay into two ZpZp (U1D dark model)*)
+
+
+(* ::Section:: *)
+(*Load FeynCalc and the necessary add-ons or other packages*)
+
+
+description="H2 -> ZpZp, MDEOEWSB, matrix element squared, tree";
+If[ $FrontEnd === Null,
+	$FeynCalcStartupMessages = False;
+	Print[description];
+];
+If[ $Notebooks === False,
+	$FeynCalcStartupMessages = False
+];
+$LoadAddOns={"FeynArts"};
+<<FeynCalc`
+$FAVerbose = 0;
+
+FCCheckVersion[9,3,1];
+
+
+(* ::Section:: *)
+(*Generate Feynman diagrams*)
+
+
+(* ::Text:: *)
+(*Nicer typesetting*)
+
+
+MakeBoxes[p1,TraditionalForm]:="\!\(\*SubscriptBox[\(p\), \(1\)]\)";
+MakeBoxes[k1,TraditionalForm]:="\!\(\*SubscriptBox[\(k\), \(1\)]\)";
+MakeBoxes[k2,TraditionalForm]:="\!\(\*SubscriptBox[\(k\), \(2\)]\)";
+
+
+(*
+diags = InsertFields[CreateTopologies[0, 2 -> 2], {F[2, {1}], -F[2, {1}]} ->
+		{V[1], V[1]}, InsertionLevel -> {Classes},
+		Restrictions->QEDOnly];
+
+Paint[diags, ColumnsXRows -> {2, 1}, Numbering -> Simple,
+	SheetHeader->None,ImageSize->{512,256}];
+*)
+
+
+(*Copy the model into FeynArts file*)
+diags = InsertFields[CreateTopologies[0, 1 -> 2], {S[1,{2}]} ->{V[10], V[10]}, InsertionLevel -> {Classes}, Model->"MDEOEWSB"(*, ExcludeParticles->{V[1]}*)];
+		
+Paint[diags, ColumnsXRows -> {2, 1}, Numbering -> Simple,
+	SheetHeader->None,ImageSize->{512,256}];
+
+
+(* ::Section:: *)
+(*Obtain the amplitude*)
+
+
+amp[0] = FCFAConvert[CreateFeynAmp[diags], IncomingMomenta->{p},
+	OutgoingMomenta->{k1,k2},UndoChiralSplittings->True,ChangeDimension->4,
+	(*TransversePolarizationVectors->{k1,k2},*) List->False, (*SMP->True,*)
+	Contract->True]/.{gYB->0,\!\(TraditionalForm\`\(\(\ \)\(MassFv(3) -> Mnu\)\)\), gBL->gp, gBY->-g1*\[Epsilon]}
+
+
+(* ::Section:: *)
+(*Fix the kinematics*)
+
+
+FCClearScalarProducts[]; 
+SP[k1] = MZp^2; 
+SP[k2] = MZp^2; 
+SP[k1, k2] = (MH2^2 - SP[k1] - SP[k2])/2; 
+
+
+(* ::Section:: *)
+(*Square the amplitude*)
+
+
+(* ::Text:: *)
+(*....*)
+
+
+ampSquared[0] = (amp[0] (ComplexConjugate[amp[0]]))//
+	FeynAmpDenominatorExplicit//
+	DoPolarizationSums[#,k1]&//DoPolarizationSums[#,k2]&//
+	FermionSpinSum[#, ExtraFactor -> 1/(2*2^2)]&//
+	DiracSimplify//
+	TrickMandelstam[#,{s,t,u,2*MZp^2+2*Mx^2}]&//Simplify
+
+
+Simplify[ampSquared[0]/.{STWp->0,CTWp->1}]
+
+
+(* ::Text:: *)
+(*....*)
+
+
+(* ::Section:: *)
+(*Total rate decay*)
+
+
+(* ::DisplayFormula:: *)
+(*\[CapitalGamma]=(|p|)/(8\[Pi]*MH2^2)*S!*M^2...P is the outgoing momenta.D.Griddithsec 6.35*)
+(**)
+
+
+\[CapitalGamma] = Simplify[Sqrt[(MH2/2)^2-MZp^2]/(16*\[Pi]*MH2^2)*ampSquared[0]]
+
+
+Simplify[\[CapitalGamma]/.{STWp->0,CTWp->1}]
