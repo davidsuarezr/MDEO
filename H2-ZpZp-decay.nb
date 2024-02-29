@@ -116,11 +116,14 @@ Simplify[ampSquared[0]/.{STWp->0,CTWp->1}]
 
 
 (* ::DisplayFormula:: *)
-(*\[CapitalGamma]=(|p|)/(8\[Pi]*MH2^2)*S!*M^2...P is the outgoing momenta.D.Griddithsec 6.35*)
+(*\[CapitalGamma]=(|p|)/(8\[Pi]*M1^2)*S!*M^2...P is the outgoing momenta.D.Griddith Ec. 6.32*)
 (**)
 
 
 \[CapitalGamma] = Simplify[Sqrt[(MH2/2)^2-MZp^2]/(16*\[Pi]*MH2^2)*ampSquared[0]]
 
 
-Simplify[\[CapitalGamma]/.{STWp->0,CTWp->1}]
+Simplify[\[CapitalGamma]/.{STWp->0,CTWp->1}/.{MH2->r^(1/2)*MZp},MZp>0]
+
+
+(Sqrt[r-4] r^2 (g1^2 v \[Epsilon]^2 ZH[2,1]+324 gp^2 vX ZH[2,2])^2)/(4096 \[Pi] MZp r)
