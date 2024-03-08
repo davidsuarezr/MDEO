@@ -27,7 +27,7 @@ for i in range(0,Num):
     #Random parameters
     MZ = 91.1876
     g1=3.55690247E-01
-    g1p = np.exp(np.random.uniform(np.log(10**(-3)),np.log(10**(0)))) #U1 coupling
+    g1p = np.exp(np.random.uniform(np.log(10**(-3)),np.log(0.3))) #U1 coupling
     epsilon = np.exp(np.random.uniform(np.log(10**(-6)),np.log(10**(-2))))
     g1p1 = 0.
     g11p = -g1*epsilon
@@ -50,7 +50,7 @@ for i in range(0,Num):
     Lam5 = (0.5/vX**2.0)*(mh1**2.0+mh2**2.0+gamma*(mh2**2.0-mh1**2.0)) ##conj[bi].bi.conj[bi].bi
     Lam6 = (0.5/(VEV*vX))*gamma*(mh2**2.0-mh1**2.0)*np.tan(2.0*theta) ##conj[bi].bi.conj[H].H
     #Perturbativity
-    if Lam5 > 4.*np.pi or Lam6 > 4.*np.pi:
+    if Lam5 > np.sqrt(4.*np.pi) and Lam6 > np.sqrt(4.*np.pi):
         continue    
     
     Lam7 = np.exp(np.random.uniform(np.log(10**(-4)),np.log(10**(0)))) #conj[bi].bi.conj[Et].Et
@@ -60,7 +60,7 @@ for i in range(0,Num):
     Lam11 = np.exp(np.random.uniform(np.log(10**(-4)),np.log(10**(0)))) ##conj[S].S.conj[Et].Et
     MS2 = np.exp(np.random.uniform(np.log(10**(6)),np.log(10**(8)))) #conj[S].S
     Mn2 = np.exp(np.random.uniform(np.log(10**(6)),np.log(10**(8)))) #mEt2 conj[Et].Et
-    Yc = np.exp(np.random.uniform(np.log(10**(-4)),np.log(10**(0)))) # Yc bi.CL.CR
+    Yc = np.exp(np.random.uniform(np.log(10**(-3)),np.log(10**(0)))) # Yc bi.CL.CR
     muC = np.exp(np.random.uniform(np.log(10**(2)),np.log(2.*10**(3)))) #muC conj[H].Et.conj[S]
 
     xdict.blocks['MINPAR'].entries[1]='%.6E    # lambda1Input'%Lam1
