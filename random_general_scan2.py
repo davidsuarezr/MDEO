@@ -31,8 +31,8 @@ for i in range(0,Num):
     epsilon = np.exp(np.random.uniform(np.log(10**(-6)),np.log(10**(-2))))
     g1p1 = 0.
     g11p = -g1*epsilon
-    #MZp = np.exp(np.random.uniform(np.log(9.6e1),np.log(5.0e2))) 
-    MZp = np.exp(np.random.uniform(np.log(1.0e0),np.log(9.1e1))) 
+    MZp = np.exp(np.random.uniform(np.log(1.0e0),np.log(1.0e3))) 
+    #MZp = np.exp(np.random.uniform(np.log(1.0e0),np.log(9.1e1))) 
     vX = MZp*(1.+epsilon**2)/(9.0*g1p)  #WARNING
     VEV = 246.220569
     #print('MZp=',MZp,g1p)
@@ -192,7 +192,7 @@ for i in range(0,Num):
     Omega2 = eval(mo.split('Omega_2h^2=')[1].split()[0])
     #print("i=",i,"Omega1=",Omega1,"Omega2=",Omega2)
     
-    if Omega1+Omega2 > 0.132:
+    if Omega1+Omega2 > 0.132 and Omega1+Omega2 < 0.108:
         continue
     
     SIN1= eval(mo.split('CDM1-nucleon cross sections[pb]:')[1].split()[7])
