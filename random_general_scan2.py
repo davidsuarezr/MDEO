@@ -169,14 +169,14 @@ for i in range(0,Num):
         spheno = subprocess.getoutput('../.././SPheno-4.0.5/bin/SPhenoMDEOlight LesHouches.in.MDEOlight_low')
         so = subprocess.getoutput('cat SPheno.spc.MDEOlight')
         #run micromegas.
-        mo = subprocess.getoutput('~/Work/micromegas_5.0.6/MDEOlight/./CalcOmega_with_DI_Detection')
+        mo = subprocess.getoutput('~/Work/micromegas_5.3.41/MDEOlight/./CalcOmega_with_DI_Detection')
     
     else:
         #run SPheno
         spheno = subprocess.getoutput('../.././SPheno-4.0.5/bin/SPhenoMDEO LesHouches.in.MDEO_low')
         so = subprocess.getoutput('cat SPheno.spc.MDEO')
         #run micromegas.
-        mo = subprocess.getoutput('~/Work/micromegas_5.0.6/MDEO/./CalcOmega_with_DI_Detection')
+        mo = subprocess.getoutput('~/Work/micromegas_5.3.41/MDEO/./CalcOmega_with_DI_Detection')
     
     T = eval(so.split('Block SPhenoLowEnergy #')[1].split()[4])
     S = eval(so.split('Block SPhenoLowEnergy #')[1].split()[10])
@@ -185,19 +185,19 @@ for i in range(0,Num):
     TWpSPheno = eval(so.split('Block ANGLES Q')[1].split()[6])
     MZpSPheno = eval(so.split('# VWm')[1].split()[1])
 
-    if len(mo.split()) == 2:
+    if len(mo.split()) <= 4: #==2 relic ensity segmentation fault, ==4 when Indirect dtetection crash
         continue     
     
     Omega1 = eval(mo.split('Omega_1h^2=')[1].split()[0])
     Omega2 = eval(mo.split('Omega_2h^2=')[1].split()[0])
     #print("i=",i,"Omega1=",Omega1,"Omega2=",Omega2)
     
-    if Omega1+Omega2 > 0.132 and Omega1+Omega2 < 0.108:
+    if Omega1+Omega2 > 0.132 or Omega1+Omega2 < 0.108:
         continue
     
     SIN1= eval(mo.split('CDM1-nucleon cross sections[pb]:')[1].split()[7])
     SIN2= eval(mo.split('CDM2-nucleon cross sections[pb]:')[1].split()[7])
-    sv = eval(mo.split('CDM2-nucleon cross sections[pb]:')[1].split()[7])
+    sv = eval(mo.split('annihilation cross section')[1].split()[0])
     
     x.append([Lam1,Lam2,Lam3,Lam4,Lam5,Lam6,Lam7,Lam8,Lam9,Lam10,Lam11,MS2,Mn2,vX,Yc,muC,g1p,epsilon,\
               ZL11,ZL12,ZL21,ZL22,ZR11,ZR12,ZR21,ZR22,\
