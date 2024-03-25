@@ -9,5 +9,5 @@ Model_for_dark_matter_and_Dirac_neutrino_masses_with_an_extra_Abelian_gauge_symm
 5. 
 
 Run:
-1. nohup python3 random_general_scan3.py 10000 1
+1. nohup python3 random_general_scan.py 10000 1
 2. ./recover_general_scan.sh

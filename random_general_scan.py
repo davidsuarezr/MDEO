@@ -20,19 +20,22 @@ x=[]
 Num = int(sys.argv[1])
 
 for i in range(0,Num):
-    
+    #print(i)
     #Open the dicctionary
     xdict = pyMDEO_LesHouches_generator.buildSLHAinFile()
 
     #Random parameters
+    MZ = 91.1876
     g1=3.55690247E-01
-    g1p = np.exp(np.random.uniform(np.log(10**(-3)),np.log(10**(0)))) #U1 coupling
+    g1p = np.exp(np.random.uniform(np.log(10**(-3)),np.log(0.3))) #U1 coupling
     epsilon = np.exp(np.random.uniform(np.log(10**(-6)),np.log(10**(-2))))
     g1p1 = 0.
     g11p = -g1*epsilon
-    MZp = np.exp(np.random.uniform(np.log(9.6e1),np.log(5.0e2))) 
+    MZp = np.exp(np.random.uniform(np.log(1.0e0),np.log(1.0e3))) 
+    #MZp = np.exp(np.random.uniform(np.log(1.0e0),np.log(9.1e1))) 
     vX = MZp*(1.+epsilon**2)/(9.0*g1p)  #WARNING
     VEV = 246.220569
+    #print('MZp=',MZp,g1p)
     
     theta = np.exp(np.random.uniform(np.log(1.0e-6),np.log(1.0e-3)))
     gamma = 1.0/np.sqrt(1.0+np.tan(2.0*theta)**2.0)
@@ -47,8 +50,8 @@ for i in range(0,Num):
     Lam5 = (0.5/vX**2.0)*(mh1**2.0+mh2**2.0+gamma*(mh2**2.0-mh1**2.0)) ##conj[bi].bi.conj[bi].bi
     Lam6 = (0.5/(VEV*vX))*gamma*(mh2**2.0-mh1**2.0)*np.tan(2.0*theta) ##conj[bi].bi.conj[H].H
     #Perturbativity
-    if Lam5 > 4.*np.pi or Lam6 > 4.*np.pi:
-        continue   
+    if Lam5 > np.sqrt(4.*np.pi) and Lam6 > np.sqrt(4.*np.pi):
+        continue    
     
     Lam7 = np.exp(np.random.uniform(np.log(10**(-4)),np.log(10**(0)))) #conj[bi].bi.conj[Et].Et
     Lam8 = np.exp(np.random.uniform(np.log(10**(-4)),np.log(10**(0)))) ##conj[S].S.conj[S].S
@@ -57,7 +60,7 @@ for i in range(0,Num):
     Lam11 = np.exp(np.random.uniform(np.log(10**(-4)),np.log(10**(0)))) ##conj[S].S.conj[Et].Et
     MS2 = np.exp(np.random.uniform(np.log(10**(6)),np.log(10**(8)))) #conj[S].S
     Mn2 = np.exp(np.random.uniform(np.log(10**(6)),np.log(10**(8)))) #mEt2 conj[Et].Et
-    Yc = np.exp(np.random.uniform(np.log(10**(-4)),np.log(10**(0)))) # Yc bi.CL.CR
+    Yc = np.exp(np.random.uniform(np.log(10**(-3)),np.log(10**(0)))) # Yc bi.CL.CR
     muC = np.exp(np.random.uniform(np.log(10**(2)),np.log(2.*10**(3)))) #muC conj[H].Et.conj[S]
 
     xdict.blocks['MINPAR'].entries[1]='%.6E    # lambda1Input'%Lam1
@@ -81,10 +84,7 @@ for i in range(0,Num):
     xdict.blocks['MINPAR'].entries[32]='%.6E    # muCinput'%muC
     
     mChi = Yc*vX/np.sqrt(2.)
-    
-    if mChi < MZp:
-        continue
-    
+        
     MX1 = mChi+np.exp(np.random.uniform(np.log(1.0),np.log(1.0e3)))
     MX2 = MX1+np.exp(np.random.uniform(np.log(1.0),np.log(1.0e3)))
     thetaf = np.exp(np.random.uniform(np.log(1.0e-3),np.log(2.0*np.pi)))
@@ -155,13 +155,62 @@ for i in range(0,Num):
     xdict.blocks['YNRIN'].entries[2,3]='%.6E    # YnR(2,3)'%YnR23
 
     #Write the Leshouches file
-    pyslha.writeSLHAFile('LesHouches.in.MDEO_low',xdict)
+    if MZp < MZ:
+        pyslha.writeSLHAFile('LesHouches.in.MDEOlight_low',xdict)
+    else:
+        pyslha.writeSLHAFile('LesHouches.in.MDEO_low',xdict)
     
-    #print('before SPHENO')
-    #run SPheno
-    #spheno = subprocess.getoutput('~/Downloads/Tesis/Automatic_Submodules_MDEO/SPHENO/bin/SPhenoMDEO LesHouches.in.MDEO_low')
-    spheno = subprocess.getoutput('../.././SPheno-4.0.5/bin/SPhenoMDEO LesHouches.in.MDEO_low')
-    so = subprocess.getoutput('cat SPheno.spc.MDEO')
+    if MZp < MZ:
+        
+        #run SPheno
+        spheno = subprocess.getoutput('../.././SPheno-4.0.5/bin/SPhenoMDEOlight LesHouches.in.MDEOlight_low')
+        so = subprocess.getoutput('cat SPheno.spc.MDEOlight')
+        
+        #run micromegas.
+        mo = subprocess.getoutput('~/Work/micromegas_6.0.3/MDEOlight/./CalcOmega_conversion')
+        if mo.split('Omega_1h^2=')[1].split()[0] == 'NAN' or eval(mo.split('Omega_1h^2=')[1].split()[0]) <0:
+            continue
+        if mo.split('Omega_2h^2=')[1].split()[0] == 'NAN' or eval(mo.split('Omega_2h^2=')[1].split()[0]) <0:
+            continue  
+            
+        Omega1 = eval(mo.split('Omega_1h^2=')[1].split()[0])
+        Omega2 = eval(mo.split('Omega_2h^2=')[1].split()[0])
+    
+        if Omega1+Omega2 > 0.132 or Omega1+Omega2 < 0.108: #~10 sigma
+            continue        
+        
+        sv1122 = eval(mo.split('Sigmav1122=')[1].split()[0])
+        sv1100 = eval(mo.split('Sigmav1100=')[1].split()[0])
+        sv2211 = eval(mo.split('Sigmav2211=')[1].split()[0])
+        sv2200 = eval(mo.split('Sigmav2200=')[1].split()[0]) 
+
+        mo = subprocess.getoutput('~/Work/micromegas_6.0.3/MDEOlight/./CalcOmega_with_DI_Detection')
+        
+    
+    else:
+        #run SPheno
+        spheno = subprocess.getoutput('../.././SPheno-4.0.5/bin/SPhenoMDEO LesHouches.in.MDEO_low')
+        so = subprocess.getoutput('cat SPheno.spc.MDEO')
+        
+        #run micromegas.
+        mo = subprocess.getoutput('~/Work/micromegas_6.0.3/MDEO/./CalcOmega_conversion')
+        if mo.split('Omega_1h^2=')[1].split()[0] == 'NAN' or eval(mo.split('Omega_1h^2=')[1].split()[0]) <0:
+            continue
+        if mo.split('Omega_2h^2=')[1].split()[0] == 'NAN' or eval(mo.split('Omega_2h^2=')[1].split()[0]) <0:
+            continue    
+            
+        Omega1 = eval(mo.split('Omega_1h^2=')[1].split()[0])
+        Omega2 = eval(mo.split('Omega_2h^2=')[1].split()[0]) 
+    
+        if Omega1+Omega2 > 0.132 or Omega1+Omega2 < 0.108:
+            continue   
+   
+        sv1122 = eval(mo.split('Sigmav1122=')[1].split()[0])
+        sv1100 = eval(mo.split('Sigmav1100=')[1].split()[0])
+        sv2211 = eval(mo.split('Sigmav2211=')[1].split()[0])
+        sv2200 = eval(mo.split('Sigmav2200=')[1].split()[0])    
+        
+        mo = subprocess.getoutput('~/Work/micromegas_6.0.3/MDEO/./CalcOmega_with_DI_Detection')
     
     T = eval(so.split('Block SPhenoLowEnergy #')[1].split()[4])
     S = eval(so.split('Block SPhenoLowEnergy #')[1].split()[10])
@@ -169,31 +218,54 @@ for i in range(0,Num):
     g2mu = eval(so.split('Block SPhenoLowEnergy #')[1].split()[26])
     TWpSPheno = eval(so.split('Block ANGLES Q')[1].split()[6])
     MZpSPheno = eval(so.split('# VWm')[1].split()[1])
-    
-    #print('before micromegas')    
-    #run micromegas.
-    #mo = subprocess.getoutput('~/Downloads/Tesis/Automatic_Submodules_MDEO/micromegas/MDEO/CalcOmega_with_DI_Detection') #with_direct_detection
-    mo = subprocess.getoutput('~/Work/micromegas_5.0.6/MDEO/./CalcOmega_with_DI_Detection')#with_direct_detection
-    
-    if len(mo.split()) == 2:
-        continue
-    
-    Omega1 = eval(mo.split('Omega_1h^2=')[1].split()[0])
-    Omega2 = eval(mo.split('Omega_2h^2=')[1].split()[0])
-    #print("i=",i,"Omega1=",Omega1,"Omega2=",Omega2)
-    
-    if Omega1+Omega2 > 0.132:
-        continue
+
+    if len(mo.split()) <= 4: #==2 relic ensity segmentation fault, ==4 when Indirect dtetection crash
+        continue     
     
     SIN1= eval(mo.split('CDM1-nucleon cross sections[pb]:')[1].split()[7])
     SIN2= eval(mo.split('CDM2-nucleon cross sections[pb]:')[1].split()[7])
-    sv = eval(mo.split('CDM2-nucleon cross sections[pb]:')[1].split()[7])
+    SDN1= eval(mo.split('CDM1-nucleon cross sections[pb]:')[1].split()[9])
+    SDN2= eval(mo.split('CDM2-nucleon cross sections[pb]:')[1].split()[9])
+    
+    if len(mo.split('annihilation cross section')) == 1: #No sv found because Omega <0.
+        continue
+    else:
+        sv = eval(mo.split('annihilation cross section')[1].split()[0])
+        
+    def capture_BR(x):
+    
+        if len(mo.split(x)) > 1:
+            BR = eval(mo.split(x)[1].split()[0])    
+        else:
+            BR = 0    
+        return BR     
+    
+    cCn3N3 = capture_BR('~chi,~Chi -> nu3 Nu3')
+    cCe3E3 = capture_BR('~chi,~Chi -> e3 E3')
+    cCu3U3 = capture_BR('~chi,~Chi -> u3 U3')
+    cCZpZp = capture_BR('~chi,~Chi -> Zp Zp')
+    #cCZZ = capture_BR('~chi,~Chi -> Z Z')
+    #cCh1Z = capture_BR('~chi,~Chi -> h1 Z')
+    cCh2Zp = capture_BR('~chi,~Chi -> h2 Zp')
+    cCWW = capture_BR('~chi,~Chi -> Wm Wp')
+
+    Xxn3N3 = capture_BR('~~Xi1,~~xi1 -> nu3 Nu3')
+    Xxe3E3 = capture_BR('~~Xi1,~~xi1 -> e3 E3')
+    Xxu3U3 = capture_BR('~~Xi1,~~xi1 -> u3 U3')
+    XxZpZp = capture_BR('~~Xi1,~~xi1 -> Zp Zp')
+    #XxZZ = capture_BR('~~Xi1,~~xi1 -> Z Z')
+    #Xxh1Z = capture_BR('~~Xi1,~~xi1 -> h1 Z')
+    Xxh2Zp = capture_BR('~~Xi1,~~xi1 -> h2 Zp')
+    Xxxc = capture_BR('~~Xi1,~~xi1 -> ~chi ~Chi')
+    XxWW = capture_BR('~~Xi1,~~xi1 -> Wm Wp')       
     
     x.append([Lam1,Lam2,Lam3,Lam4,Lam5,Lam6,Lam7,Lam8,Lam9,Lam10,Lam11,MS2,Mn2,vX,Yc,muC,g1p,epsilon,\
               ZL11,ZL12,ZL21,ZL22,ZR11,ZR12,ZR21,ZR22,\
           ZN11,ZN12,ZN21,ZN22,mXi_1,mXi_2,mns_1,mns_2,YnL11,YnL12,YnL13,YnL21,YnL22,YnL23,\
           YnR11,YnR12,YnR13,YnR21,YnR22,YnR23,Omega1,Omega2,SIN1,SIN2,sv,MZp,mh1,mh2,theta,thetaf,T,S,U,\
-              g2mu,mChi,TWpSPheno,MZpSPheno])
+              g2mu,mChi,TWpSPheno,MZpSPheno,SDN1,SDN2,YX11,YX12,YX21,YX22,\
+             cCn3N3,cCe3E3,cCu3U3,cCZpZp,cCh2Zp,cCWW,\
+             Xxn3N3,Xxe3E3,Xxu3U3,XxZpZp,Xxh2Zp,Xxxc,XxWW,sv1122,sv1100,sv2211,sv2200])
 
 x=np.asarray(x)
 
@@ -204,7 +276,9 @@ xd=pd.DataFrame(x,columns=['Lam1','Lam2','Lam3','Lam4','Lam5','Lam6','Lam7','Lam
                            'YnL12','YnL13','YnL21','YnL22','YnL23','YnR11','YnR12','YnR13',\
                            'YnR21','YnR22','YnR23','Omega1','Omega2','SIN1','SIN2','sv',\
                            'MZp','mh1','mh2','theta','thetaf','T','S','U','g2mu','mChi',\
-                           'TWpSPheno','MZpSPheno'])
+                           'TWpSPheno','MZpSPheno','SDN1','SDN2','YX11','YX12','YX21','YX22',\
+                           'cCn3N3','cCe3E3','cCu3U3','cCZpZp','cCh2Zp','cCWW',\
+                           'Xxn3N3','Xxe3E3','Xxu3U3','XxZpZp','Xxh2Zp','Xxxc','XxWW','sv1122','sv1100','sv2211','sv2200'])
 
 #argv[2] will be the number in the end of the file extension: example: xd_scan1.csv
 xd.to_csv('xd_scan-general-'+sys.argv[2]+'.csv')
