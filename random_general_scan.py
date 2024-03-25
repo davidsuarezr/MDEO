@@ -179,10 +179,22 @@ for i in range(0,Num):
         if Omega1+Omega2 > 0.132 or Omega1+Omega2 < 0.108: #~10 sigma
             continue        
         
-        sv1122 = eval(mo.split('Sigmav1122=')[1].split()[0])
-        sv1100 = eval(mo.split('Sigmav1100=')[1].split()[0])
-        sv2211 = eval(mo.split('Sigmav2211=')[1].split()[0])
-        sv2200 = eval(mo.split('Sigmav2200=')[1].split()[0]) 
+        sv1122 = mo.split('Sigmav1122=')[1].split()[0]
+        sv1100 = mo.split('Sigmav1100=')[1].split()[0]
+        sv2211 = mo.split('Sigmav2211=')[1].split()[0]
+        sv2200 = mo.split('Sigmav2200=')[1].split()[0]
+        
+        if sv1122 == 'NAN' or sv1100 == 'NAN':
+            continue
+        else:
+            sv1122 = eval(mo.split('Sigmav1122=')[1].split()[0])
+            sv1100 = eval(mo.split('Sigmav1100=')[1].split()[0])
+        
+        if sv2211 == 'NAN' or sv2200 == 'NAN':
+            continue
+        else:
+            sv2211 = eval(mo.split('Sigmav2211=')[1].split()[0])
+            sv2200 = eval(mo.split('Sigmav2200=')[1].split()[0])
 
         mo = subprocess.getoutput('~/Work/micromegas_6.0.3/MDEOlight/./CalcOmega_with_DI_Detection')
         
