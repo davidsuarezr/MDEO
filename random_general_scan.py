@@ -50,7 +50,7 @@ for i in range(0,Num):
     Lam5 = (0.5/vX**2.0)*(mh1**2.0+mh2**2.0+gamma*(mh2**2.0-mh1**2.0)) ##conj[bi].bi.conj[bi].bi
     Lam6 = (0.5/(VEV*vX))*gamma*(mh2**2.0-mh1**2.0)*np.tan(2.0*theta) ##conj[bi].bi.conj[H].H
     #Perturbativity
-    if Lam5 > np.sqrt(4.*np.pi) and Lam6 > np.sqrt(4.*np.pi):
+    if Lam5 > np.sqrt(4.*np.pi) or Lam6 > np.sqrt(4.*np.pi):
         continue    
     
     Lam7 = np.exp(np.random.uniform(np.log(10**(-4)),np.log(10**(0)))) #conj[bi].bi.conj[Et].Et

@@ -22,15 +22,15 @@ int main(int argc, char** argv)
 		ForceUG=1; 
 			err = sortOddParticles(lspname);	
 			printMasses(stdout,1);				
-	 		Omega = darkOmega2(fast,Beps);
-                        printf("Omega_1h^2=%.2E\n", Omega*(1-fracCDM2));
-                        printf("Omega_2h^2=%.2E\n", Omega*fracCDM2);			
+	 		Omega = darkOmega2(fast,Beps,0);
+                        printf("Omega_1h^2=%.2E\n", Omega*fracCDM[1]);
+                        printf("Omega_2h^2=%.2E\n", Omega*fracCDM[2]);			
 			printf("\n");
-// 			printChannels(Xf, cut,Beps,1,stdout);
+ 			printChannels(Xf, cut,Beps,1,stdout);
 			FILE *omega = fopen("omg.out","w");
 			fprintf(omega,"%i %6.6lf # total relic density \n",1,Omega);
-			fprintf(omega,"%i %6.6lf # relic density for CDM1\n", 2,Omega*(1-fracCDM2));
-			fprintf(omega,"%i %6.6lf # relic density for CDM2\n", 3,Omega*fracCDM2);			
+			fprintf(omega,"%i %6.6lf # relic density for CDM1\n", 2,Omega*fracCDM[1]);
+			fprintf(omega,"%i %6.6lf # relic density for CDM2\n", 3,Omega*fracCDM[2]);				
 // 			w = 1.;
 // 			i = 0;
 // 			while (w>cut) 
