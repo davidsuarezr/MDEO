@@ -85,7 +85,7 @@ for i in range(0,Num):
     
     mChi = Yc*vX/np.sqrt(2.)
         
-    MX1 = mChi+np.exp(np.random.uniform(np.log(1.0),np.log(1.0e3)))
+    MX1 = mChi+np.exp(np.random.uniform(np.log(1.0),np.log(5.0e3)))
     MX2 = MX1+np.exp(np.random.uniform(np.log(1.0),np.log(1.0e3)))
     thetaf = np.exp(np.random.uniform(np.log(1.0e-3),np.log(2.0*np.pi)))
     gammaf = 1.0/np.sqrt(1.0+np.tan(2.0*thetaf)**2.0)
