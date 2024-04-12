@@ -296,4 +296,4 @@ xd=pd.DataFrame(x,columns=['Lam1','Lam2','Lam3','Lam4','Lam5','Lam6','Lam7','Lam
 xd.to_csv('xd_scan-general-'+sys.argv[2]+'.csv')
 
 t2=time.time() 
-print ("The program spent", t2-t1, "s running",Num,"times -> xd_scan",sys.argv[2],".csv")
+print ("The program spent", t2-t1, "s running",Num,"times -> noKM-xd_scan",sys.argv[2],".csv")
