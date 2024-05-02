@@ -103,9 +103,9 @@ SetMandelstam[s, t, u, p1, p2, -k1, -k2, Mx, Mx, MZp, MZp]; (*quit\[EAcute] los 
 (*We need to multiply by 1/2 to account for two identical particles in the final state*)
 
 
-ampSquared[0] = (amp[0] (ComplexConjugate[amp[0]]))//
+ampSquared[0] = 1/2*(amp[0] (ComplexConjugate[amp[0]]))//
 	FeynAmpDenominatorExplicit//
-	FermionSpinSum[#, ExtraFactor -> 1/(2*2^2)]&//
+	FermionSpinSum[#, ExtraFactor -> 1/2^2]&//
 	DiracSimplify//DoPolarizationSums[#,k1]&//DoPolarizationSums[#,k2]&//
 	TrickMandelstam[#,{s,t,u,2*MZp^2+2*Mx^2}]&//Simplify
 
@@ -138,22 +138,25 @@ Simplify[(S+T+U)/.MV]
 
 
 (*Phase space factor*)
-cinematic={E1->Sqrt[(s1)^2+Mx^2],s3->Sqrt[(s1)^2+Mx^2-MZp^2],s1->Mx*v*(1+0*v^2/2)}; (*relativistic s1*)
+cinematic={E1->Sqrt[(s1)^2+Mx^2],s3->Sqrt[(s1)^2+Mx^2-MZp^2],s1->Mx*(vr/2)*(1+0*v^2/2)}; (*relativistic s1: vel=2v*)
 
 F1=Simplify[(1/(64*\[Pi]^2*S)*Sqrt[((S-(MZp+MZp)^2)(S-(MZp-MZp)^2))/((S-(Mx+Mx)^2)(S-(Mx-Mx)^2))])/.MV//.cinematic];
 
 
-vPhaseEspace=Normal[Series[v*F1,{v,0,2}]]
+F1
+
+
+vPhaseEspace=Normal[Series[vr*F1,{vr,0,2}]]
 
 
 Simplify[(S+T+U)/.MV/.cinematic]
 
 
-F2 = Simplify[AMP2/.{u->U,t->T,s->S}/.MV//.cinematic/.st^2-> 1-ct^2,Elements[Mx>0,MZp>0,v>0,\!\(TraditionalForm\`\((
-\*SuperscriptBox[\(v\), \(2\)] + 1)\)\)>0]]
+F2 = Simplify[AMP2/.{u->U,t->T,s->S}/.MV//.cinematic/.st^2-> 1-ct^2,Elements[Mx>0,MZp>0,vr>0,\!\(TraditionalForm\`\((
+\*SuperscriptBox[\(vr\), \(2\)] + 1)\)\)>0]]
 
 
-F3 = Simplify[Collect[Normal[Series[F2,{v,0,2}]],{v,v^2}]]
+F3 = Simplify[Collect[Normal[Series[F2,{vr,0,2}]],{vr,vr^2}]]
 
 
 (* ::Subsubsection:: *)
@@ -161,24 +164,24 @@ F3 = Simplify[Collect[Normal[Series[F2,{v,0,2}]],{v,v^2}]]
 
 
 Integrate[((F3*2Pi*Sin[t])//.{st->Sin[t],ct->Cos[t]}),{t,0,Pi}];
-Mv=Normal[Series[%,{v,0,2}]]
+Mv=Normal[Series[%,{vr,0,2}]]
 
 
 (* ::Subsubsection:: *)
 (*\[Sigma] .vr*)
 
 
-sigmav = vPhaseEspace*Mv
+sigmavr = vPhaseEspace*Mv
 
 
 (* ::Subsubsection:: *)
 (*S - wave part*)
 
 
-F4=Simplify[sigmav/.v->0/.MZp->r*Mx]
+F4=Simplify[sigmavr/.vr->0/.MZp->r*Mx]
 
 
-swave=-((gBL^4 Sqrt[1-r^2] (1519 r^4-1357 r^2-162))/(32 \[Pi] Mx^2 r^2 (r^2-2)^2))
+swave=-((gBL^4 Sqrt[1-r^2] (1519 r^4-1357 r^2-162))/(16 \[Pi] Mx^2 r^2 (r^2-2)^2))
 
 
 (1519-1357-162)
@@ -187,14 +190,43 @@ swave=-((gBL^4 Sqrt[1-r^2] (1519 r^4-1357 r^2-162))/(32 \[Pi] Mx^2 r^2 (r^2-2)^2
 162/(4*32)
 
 
-Limit[F4,r->1]
+
+
+
+Limit[F4,r->0]
 
 
 (* ::Subsubsection:: *)
 (*P - wave part*)
 
 
-F9=Simplify[Simplify[D[D[sigmav,v],v]/2/.v->0/.MZp->r*Mx]]
+F9=Simplify[Simplify[D[D[sigmavr,vr],vr]/2/.vr->0/.MZp->r*Mx]]
 
 
-209952/192
+11605 r^12-71254 r^10+139394 r^8-21299 r^6-216234 r^4+262764 r^2-104976/. r->1
+
+
+104976/192
+
+
+pwave=\!\(TraditionalForm\`\(-
+\*FractionBox[\(
+\*SuperscriptBox[\(gBL\), \(4\)]\ \((11605\ 
+\*SuperscriptBox[\(r\), \(12\)] - 71254\ 
+\*SuperscriptBox[\(r\), \(10\)] + 139394\ 
+\*SuperscriptBox[\(r\), \(8\)] - 21299\ 
+\*SuperscriptBox[\(r\), \(6\)] - 216234\ 
+\*SuperscriptBox[\(r\), \(4\)] + 262764\ 
+\*SuperscriptBox[\(r\), \(2\)] - 104976)\)\), \(192\ \[Pi]\ 
+\*SuperscriptBox[\(Mx\), \(2\)]\ 
+\*SuperscriptBox[\(r\), \(4\)]\ 
+\*SqrtBox[\(1 - 
+\*SuperscriptBox[\(r\), \(2\)]\)]\ 
+\*SuperscriptBox[\((
+\*SuperscriptBox[\(r\), \(2\)] - 2)\), \(4\)]\)]\)\)
+
+
+
+
+
+
