@@ -38,6 +38,19 @@ $FAVerbose = 0;
 FCCheckVersion[9,3,1];
 
 
+(* ::Print:: *)
+(*\!\(\**)
+(*StyleBox["\"\< \[Bullet] T. Hahn, Comput. Phys. Commun., 140, 418-431, 2001,\!\(\*\\\\nStyleBox[\(\\\\\\\\\\\\ \*\\\\n StyleBox[\\\\\\\" \\\\\\\", \\\\\\\"Text\\\\\\\",\\\\nStripOnInput->False]\)]\)Appen\>", "Text",*)
+(*StripOnInput->False]\)*)
+
+
+\!\(TraditionalForm\`\*
+StyleBox[
+RowBox[{"FeynCalcHowToCite", "[", "]"}], "Text",
+StripOnInput->False]\)
+
+
+
 (* ::Section:: *)
 (*Generate Feynman diagrams*)
 
@@ -63,7 +76,7 @@ Paint[diags, ColumnsXRows -> {2, 1}, Numbering -> Simple,
 
 
 diags = InsertFields[CreateTopologies[0, 2 -> 2], {F[5], -F[5]} ->
-		{V[10], V[10]}, InsertionLevel -> {Classes}, Model->"MDEOEWSB", ExcludeParticles->{S[1]}];
+		{V[10], V[10]}, InsertionLevel -> {Classes}, Model->"MDEOgeneralQEWSB", ExcludeParticles->{S[1]}];
 		
 Paint[diags, ColumnsXRows -> {2, 1}, Numbering -> Simple,
 	SheetHeader->None,ImageSize->{512,256}];
@@ -187,7 +200,21 @@ TeXForm[F4]
 swave=-((gBL^4 Sqrt[1-r^2] (1519 r^4-1357 r^2-162))/(16 \[Pi] Mx^2 r^2 (r^2-2)^2))
 
 
-(1519-1357-162)
+Simplify[F4/.{qL->4,qR->5}]
+
+
+
+TeXForm[Simplify[F4/.{qL->4,qR->5}]]
+
+
+(* ::Text:: *)
+(*Ernest Ma et all. *)
+
+
+Simplify[F4/.{qL->1,qR->1}]
+
+
+TeXForm[Simplify[F4/.{qL->1,qR->1}]]
 
 
 162/16
@@ -204,6 +231,15 @@ F9=Simplify[Simplify[D[D[sigmavr,vr],vr]/2/.vr->0/.MZp->r*Mx]]
 
 
 TeXForm[F9]
+
+
+Simplify[Simplify[F9/.{qL->4,qR->5}]]
+
+
+TeXForm[Simplify[Simplify[F9/.{qL->4,qR->5}]]]
+
+
+TeXForm[Simplify[Simplify[F9/.{qL->1,qR->1}]]]
 
 
 pwave=\!\(TraditionalForm\`\(-
