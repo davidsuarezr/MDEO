@@ -45,10 +45,13 @@ def ΔNeff1(Tdec_νL,epsilon, ThetaWp, gB):
     G_N = 6.718624025799517e-39
     ΓH = lambda T, epsilon, ThetaWp, gB, G_N: ΓνR(T, epsilon, ThetaWp, gB)-H(T, G_N)
     
-    Tdec_νR = bisect(ΓH,T[0],T[-1], args=(epsilon, ThetaWp, gB, G_N))
+    try:
+        Tdec_νR = bisect(ΓH,T[0],T[-1], args=(epsilon, ThetaWp, gB, G_N))
     
-    ΔNef = 3.0*(g_eff(Tdec_νL)/g_eff(Tdec_νR))**(4/3)
-    
+        ΔNef = 3.0*(g_eff(Tdec_νL)/g_eff(Tdec_νR))**(4/3)
+    except:
+        ΔNef= 0.0
+        
     return ΔNef
 
 #run all dataframe
