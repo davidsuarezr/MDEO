@@ -38,12 +38,6 @@ $FAVerbose = 0;
 FCCheckVersion[9,3,1];
 
 
-(* ::Print:: *)
-(*\!\(\**)
-(*StyleBox["\"\< \[Bullet] T. Hahn, Comput. Phys. Commun., 140, 418-431, 2001,\!\(\*\\\\nStyleBox[\(\\\\\\\\\\\\ \*\\\\n StyleBox[\\\\\\\" \\\\\\\", \\\\\\\"Text\\\\\\\",\\\\nStripOnInput->False]\)]\)Appen\>", "Text",*)
-(*StripOnInput->False]\)*)
-
-
 \!\(TraditionalForm\`\*
 StyleBox[
 RowBox[{"FeynCalcHowToCite", "[", "]"}], "Text",
@@ -227,7 +221,13 @@ Limit[F4,r->0]
 (*P - wave part*)
 
 
-F9=Simplify[Simplify[D[D[sigmavr,vr],vr]/2/.vr->0/.MZp->r*Mx]]
+Simplify[Simplify[D[D[sigmavr,vr],vr]/2/.vr->0/.MZp->r*Mx]]
+
+
+F9=Simplify[Simplify[D[D[sigmavr,vr],vr]/2/.vr->0/.MZp->r*Mx]/.\!\(TraditionalForm\`
+\*SuperscriptBox[\(r\), \(10\)]\)->0/.\!\(TraditionalForm\`
+\*SuperscriptBox[\(r\), \(8\)]\)->0/.\!\(TraditionalForm\`
+\*SuperscriptBox[\(r\), \(6\)]\)->0]
 
 
 TeXForm[F9]
