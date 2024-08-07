@@ -63,10 +63,10 @@ Paint[diags, ColumnsXRows -> {2, 1}, Numbering -> Simple,
 
 
 diags = InsertFields[CreateTopologies[0, 2 -> 2], {F[5], -F[5]} ->
-		{V[10], V[10]}, InsertionLevel -> {Classes}, Model->"MDEOEWSB", ExcludeParticles->{S[1]}];
+		{V[10], V[10]}, InsertionLevel -> {Classes}, Model->"MDEOEWSB", ExcludeParticles->{(*S[1]*)}];
 		
-Paint[diags, ColumnsXRows -> {2, 1}, Numbering -> Simple,
-	SheetHeader->None,ImageSize->{512,256}];
+Paint[diags, ColumnsXRows -> {3, 1}, Numbering -> Simple,
+	SheetHeader->None,ImageSize->{612,256}];
 
 
 (* ::Section:: *)
@@ -76,7 +76,13 @@ Paint[diags, ColumnsXRows -> {2, 1}, Numbering -> Simple,
 amp[0] = FCFAConvert[CreateFeynAmp[diags], IncomingMomenta->{p1,p2},
 	OutgoingMomenta->{k1,k2},UndoChiralSplittings->True,ChangeDimension->4,
 	TransversePolarizationVectors->{k1,k2}, List->False, (*SMP->True,*)
-	Contract->True]/.{CTWp->1,STWp->0,MassChi->Mx}
+	Contract->True]/.{CTWp->1,STWp->0,MassChi->Mx,ZH[Index[I2Gen, 5], 1]->0,ZH[Index[I2Gen, 5], 2]->1,SumOver[Index[I2Gen, 5], 2]->1,Masshh[Index[I2Gen, 5]]->Ms,Conjugate[YC]->YC}
+
+
+
+
+
+InputForm[%]
 
 
 (* ::Section:: *)
@@ -190,23 +196,34 @@ swave=-((gBL^4 Sqrt[1-r^2] (1519 r^4-1357 r^2-162))/(16 \[Pi] Mx^2 r^2 (r^2-2)^2
 (1519-1357-162)
 
 
-162/16
 
 
-Limit[F4,r->0]
+
+
 
 
 (* ::Subsubsection:: *)
 (*P - wave part*)
 
 
-F9=Simplify[Simplify[D[D[sigmavr,vr],vr]/2/.vr->0/.MZp->r*Mx]]
+F9=Simplify[Simplify[D[D[sigmavr,vr],vr]/2/.vr->0/.MZp->r*Mx/.vX->(Mx*Sqrt[2])/YC]]
+
+
+kk= Simplify[Simplify[F9/.{\!\(TraditionalForm\`
+\*SuperscriptBox[\(r\), \(10\)]\)->0,\!\(TraditionalForm\`
+\*SuperscriptBox[\(r\), \(8\)]\)->0,\!\(TraditionalForm\`
+\*SuperscriptBox[\(r\), \(6\)]\)->0,\!\(TraditionalForm\`
+\*SuperscriptBox[\(r\), \(4\)]\)->0}]/.\!\(TraditionalForm\`
+\*SuperscriptBox[\(r\), \(12\)]\)->0]
+
+
+Simplify[Limit[F9,Ms->Infinity]]
 
 
 TeXForm[F9]
 
 
-pwave=\!\(TraditionalForm\`\(-
+pwave1=\!\(TraditionalForm\`\(-
 \*FractionBox[\(
 \*SuperscriptBox[\(gBL\), \(4\)]\ \((11605\ 
 \*SuperscriptBox[\(r\), \(12\)] - 71254\ 
@@ -222,3 +239,20 @@ pwave=\!\(TraditionalForm\`\(-
 \*SuperscriptBox[\((
 \*SuperscriptBox[\(r\), \(2\)] - 2)\), \(4\)]\)]\)\)
 
+
+
+
+pwave2=\!\(TraditionalForm\`\(-
+\*FractionBox[\(
+\*SuperscriptBox[\(gBL\), \(4\)]\ \((262764\ 
+\*SuperscriptBox[\(r\), \(2\)] - 104976)\)\), \(192\ \[Pi]\ 
+\*SuperscriptBox[\(Mx\), \(2\)]\ 
+\*SuperscriptBox[\(r\), \(4\)]\ 
+\*SqrtBox[\(1 - 
+\*SuperscriptBox[\(r\), \(2\)]\)]\ 
+\*SuperscriptBox[\((
+\*SuperscriptBox[\(r\), \(2\)] - 2)\), \(4\)]\)]\)\)
+
+
+
+Simplify[pwave2]
