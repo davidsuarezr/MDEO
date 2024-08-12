@@ -125,7 +125,7 @@ ampSquared[0] = 1/2*(amp[0] (ComplexConjugate[amp[0]]))//
 (*Expand the ampSquared*)
 
 
-AMP2 = ampSquared[0]
+AMP2 = ampSquared[0];
 
 
 M1={E1,s1,0,0}; (*Halzen and Martin book*)
@@ -146,20 +146,20 @@ Simplify[(S+T+U)/.MV]
 (*Phase space factor*)
 cinematic={E1->Sqrt[(s1)^2+Mx^2],s3->Sqrt[(s1)^2+Mx^2-MZp^2],s1->Mx*(vr/2)*(1+1*(vr/2)^2/2)}; (*relativistic s1: vel=2v*)
 
-F1=Simplify[(1/(64*\[Pi]^2*S)*Sqrt[((S-(MZp+MZp)^2)(S-(MZp-MZp)^2))/((S-(Mx+Mx)^2)(S-(Mx-Mx)^2))])/.MV//.cinematic];
+FS=Simplify[(1/(64*\[Pi]^2*S)*Sqrt[((S-(MZp+MZp)^2)(S-(MZp-MZp)^2))/((S-(Mx+Mx)^2)(S-(Mx-Mx)^2))])/.MV//.cinematic];
 
 
-F1
+FS
 
 
-vPhaseEspace=Normal[Series[vr*F1,{vr,0,2}]]
+vPhaseEspace=Normal[Series[vr*FS,{vr,0,2}]]
 
 
 Simplify[(S+T+U)/.MV/.cinematic]
 
 
 F2 = Simplify[AMP2/.{u->U,t->T,s->S}/.MV//.cinematic/.st^2-> 1-ct^2,Elements[Mx>0,MZp>0,vr>0,\!\(TraditionalForm\`\((
-\*SuperscriptBox[\(vr\), \(2\)] + 1)\)\)>0]]
+\*SuperscriptBox[\(vr\), \(2\)] + 1)\)\)>0]];
 
 
 F3 = Simplify[Collect[Normal[Series[F2,{vr,0,2}]],{vr,vr^2}]]
@@ -196,31 +196,31 @@ swave=-((gBL^4 Sqrt[1-r^2] (1519 r^4-1357 r^2-162))/(16 \[Pi] Mx^2 r^2 (r^2-2)^2
 (1519-1357-162)
 
 
-
-
-
-
-
-
 (* ::Subsubsection:: *)
 (*P - wave part*)
 
 
-F9=Simplify[Simplify[D[D[sigmavr,vr],vr]/2/.vr->0/.MZp->r*Mx/.vX->(Mx*Sqrt[2])/YC]]
+F9=Simplify[D[D[sigmavr,vr],vr]/2/.vr->0/.MZp->r*Mx/.vX->(Mx*Sqrt[2])/YC]
 
 
 kk= Simplify[Simplify[F9/.{\!\(TraditionalForm\`
+\*SuperscriptBox[\(r\), \(12\)]\)->0,\!\(TraditionalForm\`
 \*SuperscriptBox[\(r\), \(10\)]\)->0,\!\(TraditionalForm\`
-\*SuperscriptBox[\(r\), \(8\)]\)->0,\!\(TraditionalForm\`
-\*SuperscriptBox[\(r\), \(6\)]\)->0,\!\(TraditionalForm\`
-\*SuperscriptBox[\(r\), \(4\)]\)->0}]/.\!\(TraditionalForm\`
-\*SuperscriptBox[\(r\), \(12\)]\)->0]
+\*SuperscriptBox[\(r\), \(8\)]\)->0}]]
+
+
+
+
+
+
+
+
 
 
 Simplify[Limit[F9,Ms->Infinity]]
 
 
-TeXForm[F9]
+TeXForm[kk]
 
 
 pwave1=\!\(TraditionalForm\`\(-
