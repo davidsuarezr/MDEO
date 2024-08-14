@@ -209,9 +209,29 @@ kk= Simplify[Simplify[F9/.{\!\(TraditionalForm\`
 \*SuperscriptBox[\(r\), \(8\)]\)->0}]]
 
 
+sfactor2 = (\!\(TraditionalForm\`\(\(384\)\(\ \)\(\[Pi]\)\(\ \)\)\)*\!\(TraditionalForm\`
+\*SuperscriptBox[\((
+\*SuperscriptBox[\(Ms\), \(2\)]\ Mx - 4\ 
+\*SuperscriptBox[\(Mx\), \(3\)])\), \(2\)]\)/(\!\(TraditionalForm\`
+\*SuperscriptBox[\(gBL\), \(4\)]\)*\!\(TraditionalForm\`
+\*SqrtBox[\(1 - 
+\*SuperscriptBox[\(r\), \(2\)]\)]\)))
 
 
+sfactor = (\!\(TraditionalForm\`\(\(384\)\(\ \)\(\[Pi]\)\(\ \)\)\)*\!\(TraditionalForm\`
+\*SuperscriptBox[\((
+\*SuperscriptBox[\(Ms\), \(2\)]\ Mx - 4\ 
+\*SuperscriptBox[\(Mx\), \(3\)])\), \(2\)]\)/(\!\(TraditionalForm\`
+\*SuperscriptBox[\(gBL\), \(4\)]\)))
 
+
+F10=Simplify[F9*sfactor]
+
+
+Normal[Series[F10,{r,0,2}]]
+
+
+F11 = Normal[Series[F10,{r,0,2}]]/sfactor
 
 
 
@@ -220,7 +240,7 @@ kk= Simplify[Simplify[F9/.{\!\(TraditionalForm\`
 Simplify[Limit[F9,Ms->Infinity]]
 
 
-TeXForm[kk]
+TeXForm[F11]
 
 
 pwave1=\!\(TraditionalForm\`\(-
