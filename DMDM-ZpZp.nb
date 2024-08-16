@@ -234,9 +234,6 @@ Normal[Series[F10,{r,0,2}]]
 F11 = Normal[Series[F10,{r,0,2}]]/sfactor
 
 
-
-
-
 Simplify[Limit[F9,Ms->Infinity]]
 
 
