@@ -35,7 +35,7 @@ for i in range(0,Num):
     MZp = np.exp(np.random.uniform(np.log(1e1),np.log(9.1e1))) 
     print(MZp)
     #vX = MZp*(1.+epsilon**2)/(9.0*g1p)  #da 10 GeV
-    vX = 500.0
+    vX = 430.0
     VEV = 246.220569
     g1p = MZp/(9*vX)
     #print('MZp=',MZp,g1p)
@@ -44,7 +44,7 @@ for i in range(0,Num):
     gamma = 1.0/np.sqrt(1.0+np.tan(2.0*theta)**2.0)
     
     mh1=125.1
-    mh2= 200.0 #np.exp(np.random.uniform(np.log(10.),np.log(mh1))) #WARNING
+    mh2= 800.0 #np.exp(np.random.uniform(np.log(10.),np.log(mh1))) #WARNING
     Lam1=(0.5/VEV**2.0)*(mh1**2.0+mh2**2.0-gamma*(mh2**2.0-mh1**2.0)) 
     #Lam1 = 0.0143
     
@@ -67,8 +67,8 @@ for i in range(0,Num):
     Mn2 = 1.0E8 #mEt2 conj[Et].Et
     #Yc = 0.255 # Yc bi.CL.CR #70
     #Yc = 0.226 # Yc bi.CL.CR # 80
-    #Yc = 0.240 # Yc bi.CL.CR # 85
-    Yc = 0.2433 # Yc bi.CL.CR # 86
+    #Yc = 0.2433 # Yc bi.CL.CR # 85
+    Yc = 0.98 # Yc bi.CL.CR # 86
     #Yc = 0.2456 # Yc bi.CL.CR # 87
     #Yc = 0.2487 # Yc bi.CL.CR # 88
     muC = 11E-10 #muC conj[H].Et.conj[S]
@@ -185,6 +185,7 @@ for i in range(0,Num):
             
         Omega1 = eval(mo.split('Omega_1h^2=')[1].split()[0])
         Omega2 = eval(mo.split('Omega_2h^2=')[1].split()[0])
+        print(Omega1)
     
         #if Omega1+Omega2 > 0.132 or Omega1+Omega2 < 0.108: #~10 sigma
         #    continue        

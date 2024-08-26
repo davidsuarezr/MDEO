@@ -33,18 +33,21 @@ for i in range(0,Num):
     g11p = -g1*epsilon
     #MZp = 5.0 
     MZp = np.exp(np.random.uniform(np.log(1e1),np.log(9.1e1))) 
-    print(MZp)
+    #print(MZp)
     #vX = MZp*(1.+epsilon**2)/(9.0*g1p)  #da 10 GeV
-    vX = 500.0
+    vX = 200.0
     VEV = 246.220569
     g1p = MZp/(9*vX)
     #print('MZp=',MZp,g1p)
+
+    Yc = 0.85 # Yc bi.CL.CR # 86
+    mChi = Yc*vX/np.sqrt(2.)
     
     theta = 1E-4
     gamma = 1.0/np.sqrt(1.0+np.tan(2.0*theta)**2.0)
     
     mh1=125.1
-    mh2= 60.0 #np.exp(np.random.uniform(np.log(10.),np.log(mh1))) #WARNING
+    mh2= mChi +3000. #WARNING
     Lam1=(0.5/VEV**2.0)*(mh1**2.0+mh2**2.0-gamma*(mh2**2.0-mh1**2.0)) 
     #Lam1 = 0.0143
     
@@ -55,8 +58,8 @@ for i in range(0,Num):
     Lam6 = 0.0 ##conj[bi].bi.conj[H].H
     
     # Perturbativity
-    if Lam5 > np.sqrt(4.*np.pi) or Lam6 > np.sqrt(4.*np.pi):
-        continue    
+    #if Lam5 > np.sqrt(4.*np.pi) or Lam6 > np.sqrt(4.*np.pi):
+    #    continue    
     
     Lam7 = 0 #conj[bi].bi.conj[Et].Et
     Lam8 = 0 ##conj[S].S.conj[S].S
@@ -68,10 +71,12 @@ for i in range(0,Num):
     #Yc = 0.255 # Yc bi.CL.CR #70
     #Yc = 0.226 # Yc bi.CL.CR # 80
     #Yc = 0.240 # Yc bi.CL.CR # 85
-    Yc = 0.2433 # Yc bi.CL.CR # 86
+    #Yc = 1.0 # Yc bi.CL.CR # 86
     #Yc = 0.2456 # Yc bi.CL.CR # 87
     #Yc = 0.2487 # Yc bi.CL.CR # 88
     muC = 11E-10 #muC conj[H].Et.conj[S]
+    
+    #mChi = Yc*vX/np.sqrt(2.)
 
     xdict.blocks['MINPAR'].entries[1]='%.6E    # lambda1Input'%Lam1
     xdict.blocks['MINPAR'].entries[2]='%.6E    # lambda2Input'%Lam2
@@ -92,11 +97,9 @@ for i in range(0,Num):
     xdict.blocks['MINPAR'].entries[30]='%.6E    # vXinput'%vX
     xdict.blocks['MINPAR'].entries[31]='%.6E    # Ycinput'%Yc
     xdict.blocks['MINPAR'].entries[32]='%.6E    # muCinput'%muC
-    
-    mChi = Yc*vX/np.sqrt(2.)
         
-    MX1 = 500.
-    MX2 = 750.
+    MX1 = 700.
+    MX2 = 900.
     thetaf = 0
     gammaf = 1.0/np.sqrt(1.0+np.tan(2.0*thetaf)**2.0)
     YX11 = np.sqrt(2.0)/vX*0.5*(MX1+MX2-gammaf*(MX2-MX1)) #Yx bi.FxL.FxR
@@ -185,6 +188,7 @@ for i in range(0,Num):
             
         Omega1 = eval(mo.split('Omega_1h^2=')[1].split()[0])
         Omega2 = eval(mo.split('Omega_2h^2=')[1].split()[0])
+        print('g1p=',g1p,mChi,'MZP=', MZp, Omega1)
     
         #if Omega1+Omega2 > 0.132 or Omega1+Omega2 < 0.108: #~10 sigma
         #    continue        
