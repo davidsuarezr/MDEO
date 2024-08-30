@@ -79,9 +79,6 @@ amp[0] = FCFAConvert[CreateFeynAmp[diags], IncomingMomenta->{p1,p2},
 	Contract->True]/.{CTWp->1,STWp->0,MassChi->Mx,ZH[Index[I2Gen, 5], 1]->0,ZH[Index[I2Gen, 5], 2]->1,SumOver[Index[I2Gen, 5], 2]->1,Masshh[Index[I2Gen, 5]]->Ms,Conjugate[YC]->YC}
 
 
-
-
-
 InputForm[%]
 
 
@@ -149,9 +146,6 @@ cinematic={E1->Sqrt[(s1)^2+Mx^2],s3->Sqrt[(s1)^2+Mx^2-MZp^2],s1->Mx*(vr/2)*(1+1*
 FS=Simplify[(1/(64*\[Pi]^2*S)*Sqrt[((S-(MZp+MZp)^2)(S-(MZp-MZp)^2))/((S-(Mx+Mx)^2)(S-(Mx-Mx)^2))])/.MV//.cinematic];
 
 
-FS
-
-
 vPhaseEspace=Normal[Series[vr*FS,{vr,0,2}]]
 
 
@@ -162,22 +156,19 @@ F2 = Simplify[AMP2/.{u->U,t->T,s->S}/.MV//.cinematic/.st^2-> 1-ct^2,Elements[Mx>
 \*SuperscriptBox[\(vr\), \(2\)] + 1)\)\)>0]];
 
 
-F3 = Simplify[Collect[Normal[Series[F2,{vr,0,2}]],{vr,vr^2}]]
+(* ::Text:: *)
+(*Full expansion*)
+
+
+F3 = Simplify[Collect[Normal[Series[vr*FS*F2,{vr,0,2}]],{vr,vr^2}]];
 
 
 (* ::Subsubsection:: *)
-(*M(v)=\[Integral] (dM/d\[CapitalOmega])d\[CapitalOmega]*)
+(*M(v)=\[Integral] (dM/d\[CapitalOmega])d\[CapitalOmega] and \[Sigma] .vr*)
 
 
 Integrate[((F3*2Pi*Sin[t])//.{st->Sin[t],ct->Cos[t]}),{t,0,Pi}];
-Mv=Normal[Series[%,{vr,0,2}]]
-
-
-(* ::Subsubsection:: *)
-(*\[Sigma] .vr*)
-
-
-sigmavr = vPhaseEspace*Mv
+sigmavr=Normal[Series[%,{vr,0,2}]]
 
 
 (* ::Subsubsection:: *)
@@ -190,7 +181,16 @@ F4=Simplify[sigmavr/.vr->0/.MZp->r*Mx]
 TeXForm[F4]
 
 
-swave=-((gBL^4 Sqrt[1-r^2] (1519 r^4-1357 r^2-162))/(16 \[Pi] Mx^2 r^2 (r^2-2)^2))
+swave=\!\(TraditionalForm\`
+\*FractionBox[\(
+\*SuperscriptBox[\(gBL\), \(4\)]\ 
+\*SuperscriptBox[\((1 - 
+\*SuperscriptBox[\(r\), \(2\)])\), \(3/2\)]\ \((1519\ 
+\*SuperscriptBox[\(r\), \(2\)] + 162)\)\), \(16\ \[Pi]\ 
+\*SuperscriptBox[\(Mx\), \(2\)]\ 
+\*SuperscriptBox[\(r\), \(2\)]\ 
+\*SuperscriptBox[\((
+\*SuperscriptBox[\(r\), \(2\)] - 2)\), \(2\)]\)]\)
 
 
 (1519-1357-162)
@@ -203,21 +203,6 @@ swave=-((gBL^4 Sqrt[1-r^2] (1519 r^4-1357 r^2-162))/(16 \[Pi] Mx^2 r^2 (r^2-2)^2
 F9=Simplify[D[D[sigmavr,vr],vr]/2/.vr->0/.MZp->r*Mx/.vX->(Mx*Sqrt[2])/YC]
 
 
-kk= Simplify[Simplify[F9/.{\!\(TraditionalForm\`
-\*SuperscriptBox[\(r\), \(12\)]\)->0,\!\(TraditionalForm\`
-\*SuperscriptBox[\(r\), \(10\)]\)->0,\!\(TraditionalForm\`
-\*SuperscriptBox[\(r\), \(8\)]\)->0}]]
-
-
-sfactor2 = (\!\(TraditionalForm\`\(\(384\)\(\ \)\(\[Pi]\)\(\ \)\)\)*\!\(TraditionalForm\`
-\*SuperscriptBox[\((
-\*SuperscriptBox[\(Ms\), \(2\)]\ Mx - 4\ 
-\*SuperscriptBox[\(Mx\), \(3\)])\), \(2\)]\)/(\!\(TraditionalForm\`
-\*SuperscriptBox[\(gBL\), \(4\)]\)*\!\(TraditionalForm\`
-\*SqrtBox[\(1 - 
-\*SuperscriptBox[\(r\), \(2\)]\)]\)))
-
-
 sfactor = (\!\(TraditionalForm\`\(\(384\)\(\ \)\(\[Pi]\)\(\ \)\)\)*\!\(TraditionalForm\`
 \*SuperscriptBox[\((
 \*SuperscriptBox[\(Ms\), \(2\)]\ Mx - 4\ 
@@ -228,48 +213,48 @@ sfactor = (\!\(TraditionalForm\`\(\(384\)\(\ \)\(\[Pi]\)\(\ \)\)\)*\!\(Tradition
 F10=Simplify[F9*sfactor]
 
 
-Normal[Series[F10,{r,0,2}]]
-
-
 F11 = Normal[Series[F10,{r,0,2}]]/sfactor
 
 
-Simplify[Limit[F9,Ms->Infinity]]
+Simplify[Limit[F11,Ms->Infinity]]
 
 
 TeXForm[F11]
 
 
-pwave1=\!\(TraditionalForm\`\(-
+pwave=\!\(TraditionalForm\`
 \*FractionBox[\(
-\*SuperscriptBox[\(gBL\), \(4\)]\ \((11605\ 
-\*SuperscriptBox[\(r\), \(12\)] - 71254\ 
-\*SuperscriptBox[\(r\), \(10\)] + 139394\ 
-\*SuperscriptBox[\(r\), \(8\)] - 21299\ 
-\*SuperscriptBox[\(r\), \(6\)] - 216234\ 
-\*SuperscriptBox[\(r\), \(4\)] + 262764\ 
-\*SuperscriptBox[\(r\), \(2\)] - 104976)\)\), \(192\ \[Pi]\ 
-\*SuperscriptBox[\(Mx\), \(2\)]\ 
-\*SuperscriptBox[\(r\), \(4\)]\ 
-\*SqrtBox[\(1 - 
-\*SuperscriptBox[\(r\), \(2\)]\)]\ 
+\*SuperscriptBox[\(gBL\), \(4\)]\ \((\(-
+\*FractionBox[\(21261\ 
+\*SuperscriptBox[\(Ms\), \(4\)]\), \(4\)]\) - 9318\ 
+\*SuperscriptBox[\(Ms\), \(2\)]\ 
+\*SuperscriptBox[\(Mx\), \(2\)] + 
+\*FractionBox[\(13122\ 
+\*SuperscriptBox[\(Ms\), \(4\)] - 209952\ 
+\*SuperscriptBox[\(Ms\), \(2\)]\ 
+\*SuperscriptBox[\(Mx\), \(2\)] + 944784\ 
+\*SuperscriptBox[\(Mx\), \(4\)]\), 
+SuperscriptBox[\(r\), \(4\)]] + 
+\*SuperscriptBox[\(r\), \(2\)]\ \((6724\ 
+\*SuperscriptBox[\(Ms\), \(4\)] - 60434\ 
+\*SuperscriptBox[\(Ms\), \(2\)]\ 
+\*SuperscriptBox[\(Mx\), \(2\)] + 35737\ 
+\*SuperscriptBox[\(Mx\), \(4\)])\) + 
+\*FractionBox[\(\(-\(162\ 
+\*SuperscriptBox[\(Ms\), \(4\)]\)\) + 106272\ 
+\*SuperscriptBox[\(Ms\), \(2\)]\ 
+\*SuperscriptBox[\(Mx\), \(2\)] - 894888\ 
+\*SuperscriptBox[\(Mx\), \(4\)]\), 
+SuperscriptBox[\(r\), \(2\)]] + 476610\ 
+\*SuperscriptBox[\(Mx\), \(4\)])\)\), \(384\ \[Pi]\ 
 \*SuperscriptBox[\((
-\*SuperscriptBox[\(r\), \(2\)] - 2)\), \(4\)]\)]\)\)
+\*SuperscriptBox[\(Ms\), \(2\)]\ Mx - 4\ 
+\*SuperscriptBox[\(Mx\), \(3\)])\), \(2\)]\)]\)
 
 
 
 
-pwave2=\!\(TraditionalForm\`\(-
-\*FractionBox[\(
-\*SuperscriptBox[\(gBL\), \(4\)]\ \((262764\ 
-\*SuperscriptBox[\(r\), \(2\)] - 104976)\)\), \(192\ \[Pi]\ 
-\*SuperscriptBox[\(Mx\), \(2\)]\ 
-\*SuperscriptBox[\(r\), \(4\)]\ 
-\*SqrtBox[\(1 - 
-\*SuperscriptBox[\(r\), \(2\)]\)]\ 
-\*SuperscriptBox[\((
-\*SuperscriptBox[\(r\), \(2\)] - 2)\), \(4\)]\)]\)\)
 
 
 
-Simplify[pwave2]
+
