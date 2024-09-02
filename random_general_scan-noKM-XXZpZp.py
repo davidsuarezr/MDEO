@@ -35,19 +35,19 @@ for i in range(0,Num):
     MZp = np.exp(np.random.uniform(np.log(1e1),np.log(9.1e1))) 
     #print(MZp)
     #vX = MZp*(1.+epsilon**2)/(9.0*g1p)  #da 10 GeV
-    vX = 300.0
+    vX = 400.0
     VEV = 246.220569
     g1p = MZp/(9*vX)
     #print('MZp=',MZp,g1p)
 
-    Yc = 0.0825 # Yc bi.CL.CR # 86
+    Yc = 0.85 # Yc bi.CL.CR # 86
     mChi = Yc*vX/np.sqrt(2.)
     
     theta = 1.0E-4
     gamma = 1.0/np.sqrt(1.0+np.tan(2.0*theta)**2.0)
     
     mh1=125.1
-    mh2= 2*mChi + 500. #WARNING
+    mh2= 553. #WARNING
     Lam1=(0.5/VEV**2.0)*(mh1**2.0+mh2**2.0-gamma*(mh2**2.0-mh1**2.0)) 
     #Lam1 = 0.0143
     
@@ -99,8 +99,8 @@ for i in range(0,Num):
     xdict.blocks['MINPAR'].entries[31]='%.6E    # Ycinput'%Yc
     xdict.blocks['MINPAR'].entries[32]='%.6E    # muCinput'%muC
         
-    MX1 = 3000.
-    MX2 = 4000.
+    MX1 = 1000.
+    MX2 = 2000.
     thetaf = 0
     gammaf = 1.0/np.sqrt(1.0+np.tan(2.0*thetaf)**2.0)
     YX11 = np.sqrt(2.0)/vX*0.5*(MX1+MX2-gammaf*(MX2-MX1)) #Yx bi.FxL.FxR
