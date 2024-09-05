@@ -250,11 +250,3 @@ SuperscriptBox[\(r\), \(2\)]] + 476610\
 \*SuperscriptBox[\((
 \*SuperscriptBox[\(Ms\), \(2\)]\ Mx - 4\ 
 \*SuperscriptBox[\(Mx\), \(3\)])\), \(2\)]\)]\)
-
-
-
-
-
-
-
-
