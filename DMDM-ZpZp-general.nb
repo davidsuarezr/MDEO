@@ -184,7 +184,7 @@ F4=Simplify[sigmavr/.vr->0/.MZp->r*Mx]
 QVA={qL-> QV-QA, qR-> QV+QA};
 
 
-Simplify[F4/.QVA]
+Simplify[F4/.QVA/.{Mx->Subscript[M, \[CapitalPsi]],Ms->Subscript[m, h],gBL->Subscript[g, D]}]
 
 
 TeXForm[%]
@@ -216,10 +216,17 @@ swave=\!\(TraditionalForm\`
 U1Q={qL->4, qR->5};
 
 
-Simplify[F4/.U1Q]
+Simplify[F4/.U1Q/.{Mx->Subscript[M, \[CapitalPsi]],Ms->Subscript[m, h],gBL->Subscript[g, D]}]
 
 
 TeXForm[%]
+
+
+(* ::Subsubsection:: *)
+(*Vector - like limit*)
+
+
+swave/.{QA->0,QV->1}
 
 
 (* ::Subsubsection:: *)
@@ -236,77 +243,116 @@ sfactor = (\!\(TraditionalForm\`\(\(384\)\(\ \)\(\[Pi]\)\(\ \)\)\)*\!\(Tradition
 \*SuperscriptBox[\(gBL\), \(4\)]\)))
 
 
-F10=Simplify[F9*sfactor]
+F10=Simplify[(F9/.QVA)*sfactor]
 
 
-F11 = FullSimplify[FullSimplify[Normal[Series[F10,{r,0,2}]]]/sfactor]
+F11 = Normal[Series[F10,{r,0,2}]]
 
 
 Simplify[Limit[F11,Ms->Infinity]]
 
 
-pwave=\!\(TraditionalForm\`\(
-\*FractionBox[\(1\), \(1536\ \[Pi]\ 
-\*SuperscriptBox[\(r\), \(4\)]\ 
-\*SuperscriptBox[\((
-\*SuperscriptBox[\(Ms\), \(2\)]\ Mx - 4\ 
-\*SuperscriptBox[\(Mx\), \(3\)])\), \(2\)]\)]\(
-\*SuperscriptBox[\(gBL\), \(4\)]\ \((
-\*SuperscriptBox[\(Ms\), \(4\)]\ \((16\ 
-\*SuperscriptBox[\(r\), \(6\)]\ 
-\*SuperscriptBox[\((
-\*SuperscriptBox[\(qL\), \(2\)] + 
-\*SuperscriptBox[\(qR\), \(2\)])\), \(2\)] - 8\ 
-\*SuperscriptBox[\(r\), \(2\)]\ 
-\*SuperscriptBox[\((
-\*SuperscriptBox[\(qL\), \(2\)] - 
-\*SuperscriptBox[\(qR\), \(2\)])\), \(2\)] + 
-\*SuperscriptBox[\(r\), \(4\)]\ \((19\ 
-\*SuperscriptBox[\(qL\), \(4\)] - 20\ 
-\*SuperscriptBox[\(qL\), \(3\)]\ qR - 54\ 
-\*SuperscriptBox[\(qL\), \(2\)]\ 
-\*SuperscriptBox[\(qR\), \(2\)] - 20\ qL\ 
-\*SuperscriptBox[\(qR\), \(3\)] + 19\ 
-\*SuperscriptBox[\(qR\), \(4\)])\) + 8\ 
-\*SuperscriptBox[\((qL + qR)\), \(4\)])\) + 8\ 
+pwave=\!\(TraditionalForm\`\(-
+\*FractionBox[\(8\ \((4\ 
+\*SuperscriptBox[\(Ms\), \(4\)]\ 
+\*SuperscriptBox[\(QA\), \(2\)]\ 
+\*SuperscriptBox[\(QV\), \(2\)] - 32\ 
 \*SuperscriptBox[\(Ms\), \(2\)]\ 
-\*SuperscriptBox[\(Mx\), \(2\)]\ \((
-\*SuperscriptBox[\(r\), \(6\)]\ \((\(-\((
-\*SuperscriptBox[\(qL\), \(2\)] + 
-\*SuperscriptBox[\(qR\), \(2\)])\)\))\)\ \((16\ 
-\*SuperscriptBox[\(qL\), \(2\)] + 16\ 
-\*SuperscriptBox[\(qR\), \(2\)] + 81)\) + 
-\*SuperscriptBox[\(r\), \(4\)]\ \((\(-\(19\ 
-\*SuperscriptBox[\(qL\), \(4\)]\)\) + 20\ 
-\*SuperscriptBox[\(qL\), \(3\)]\ qR + 54\ 
-\*SuperscriptBox[\(qL\), \(2\)]\ 
-\*SuperscriptBox[\(qR\), \(2\)] + 4\ qL\ qR\ \((5\ 
-\*SuperscriptBox[\(qR\), \(2\)] - 324)\) - 19\ 
-\*SuperscriptBox[\(qR\), \(4\)])\) + 8\ 
-\*SuperscriptBox[\(r\), \(2\)]\ \((
-\*SuperscriptBox[\((qL - qR)\), \(2\)] + 81)\)\ 
-\*SuperscriptBox[\((qL + qR)\), \(2\)] - 8\ 
-\*SuperscriptBox[\((qL + qR)\), \(2\)]\ \((
-\*SuperscriptBox[\((qL + qR)\), \(2\)] + 81)\))\) + 4\ 
-\*SuperscriptBox[\(Mx\), \(4\)]\ \((
-\*SuperscriptBox[\(r\), \(6\)]\ \((64\ 
-\*SuperscriptBox[\(qL\), \(4\)] + 8\ 
-\*SuperscriptBox[\(qL\), \(2\)]\ \((16\ 
-\*SuperscriptBox[\(qR\), \(2\)] + 81)\) + 64\ 
-\*SuperscriptBox[\(qR\), \(4\)] + 648\ 
-\*SuperscriptBox[\(qR\), \(2\)] - 98415)\) + 2\ 
-\*SuperscriptBox[\(r\), \(4\)]\ \((38\ 
-\*SuperscriptBox[\(qL\), \(4\)] - 40\ 
-\*SuperscriptBox[\(qL\), \(3\)]\ qR - 108\ 
-\*SuperscriptBox[\(qL\), \(2\)]\ 
-\*SuperscriptBox[\(qR\), \(2\)] + 8\ qL\ qR\ \((648 - 5\ 
-\*SuperscriptBox[\(qR\), \(2\)])\) + 38\ 
-\*SuperscriptBox[\(qR\), \(4\)] + 177147)\) - 8\ 
-\*SuperscriptBox[\(r\), \(2\)]\ \((4\ \((
-\*SuperscriptBox[\((qL - qR)\), \(2\)] + 162)\)\ 
-\*SuperscriptBox[\((qL + qR)\), \(2\)] + 59049)\) + 16\ \((2\ \((
-\*SuperscriptBox[\((qL + qR)\), \(2\)] + 162)\)\ 
-\*SuperscriptBox[\((qL + qR)\), \(2\)] + 19683)\))\))\)\)\)\)
+\*SuperscriptBox[\(Mx\), \(2\)]\ 
+\*SuperscriptBox[\(QA\), \(2\)]\ 
+\*SuperscriptBox[\(QV\), \(2\)] - 648\ 
+\*SuperscriptBox[\(Ms\), \(2\)]\ 
+\*SuperscriptBox[\(Mx\), \(2\)]\ 
+\*SuperscriptBox[\(QV\), \(2\)] + 64\ 
+\*SuperscriptBox[\(Mx\), \(4\)]\ 
+\*SuperscriptBox[\(QA\), \(2\)]\ 
+\*SuperscriptBox[\(QV\), \(2\)] + 2592\ 
+\*SuperscriptBox[\(Mx\), \(4\)]\ 
+\*SuperscriptBox[\(QV\), \(2\)] + 59049\ 
+\*SuperscriptBox[\(Mx\), \(4\)])\)\), 
+SuperscriptBox[\(r\), \(2\)]]\) + 
+\*SuperscriptBox[\(r\), \(2\)]\ \((16\ 
+\*SuperscriptBox[\(Ms\), \(4\)]\ 
+\*SuperscriptBox[\(QA\), \(4\)] + 32\ 
+\*SuperscriptBox[\(Ms\), \(4\)]\ 
+\*SuperscriptBox[\(QA\), \(2\)]\ 
+\*SuperscriptBox[\(QV\), \(2\)] + 16\ 
+\*SuperscriptBox[\(Ms\), \(4\)]\ 
+\*SuperscriptBox[\(QV\), \(4\)] - 128\ 
+\*SuperscriptBox[\(Ms\), \(2\)]\ 
+\*SuperscriptBox[\(Mx\), \(2\)]\ 
+\*SuperscriptBox[\(QA\), \(4\)] - 256\ 
+\*SuperscriptBox[\(Ms\), \(2\)]\ 
+\*SuperscriptBox[\(Mx\), \(2\)]\ 
+\*SuperscriptBox[\(QA\), \(2\)]\ 
+\*SuperscriptBox[\(QV\), \(2\)] - 324\ 
+\*SuperscriptBox[\(Ms\), \(2\)]\ 
+\*SuperscriptBox[\(Mx\), \(2\)]\ 
+\*SuperscriptBox[\(QA\), \(2\)] - 128\ 
+\*SuperscriptBox[\(Ms\), \(2\)]\ 
+\*SuperscriptBox[\(Mx\), \(2\)]\ 
+\*SuperscriptBox[\(QV\), \(4\)] - 324\ 
+\*SuperscriptBox[\(Ms\), \(2\)]\ 
+\*SuperscriptBox[\(Mx\), \(2\)]\ 
+\*SuperscriptBox[\(QV\), \(2\)] + 256\ 
+\*SuperscriptBox[\(Mx\), \(4\)]\ 
+\*SuperscriptBox[\(QA\), \(4\)] + 512\ 
+\*SuperscriptBox[\(Mx\), \(4\)]\ 
+\*SuperscriptBox[\(QA\), \(2\)]\ 
+\*SuperscriptBox[\(QV\), \(2\)] + 1296\ 
+\*SuperscriptBox[\(Mx\), \(4\)]\ 
+\*SuperscriptBox[\(QA\), \(2\)] + 256\ 
+\*SuperscriptBox[\(Mx\), \(4\)]\ 
+\*SuperscriptBox[\(QV\), \(4\)] + 1296\ 
+\*SuperscriptBox[\(Mx\), \(4\)]\ 
+\*SuperscriptBox[\(QV\), \(2\)] - 98415\ 
+\*SuperscriptBox[\(Mx\), \(4\)])\) + 2\ \((3\ 
+\*SuperscriptBox[\(Ms\), \(4\)]\ 
+\*SuperscriptBox[\(QA\), \(4\)] + 42\ 
+\*SuperscriptBox[\(Ms\), \(4\)]\ 
+\*SuperscriptBox[\(QA\), \(2\)]\ 
+\*SuperscriptBox[\(QV\), \(2\)] - 7\ 
+\*SuperscriptBox[\(Ms\), \(4\)]\ 
+\*SuperscriptBox[\(QV\), \(4\)] - 24\ 
+\*SuperscriptBox[\(Ms\), \(2\)]\ 
+\*SuperscriptBox[\(Mx\), \(2\)]\ 
+\*SuperscriptBox[\(QA\), \(4\)] - 336\ 
+\*SuperscriptBox[\(Ms\), \(2\)]\ 
+\*SuperscriptBox[\(Mx\), \(2\)]\ 
+\*SuperscriptBox[\(QA\), \(2\)]\ 
+\*SuperscriptBox[\(QV\), \(2\)] + 1296\ 
+\*SuperscriptBox[\(Ms\), \(2\)]\ 
+\*SuperscriptBox[\(Mx\), \(2\)]\ 
+\*SuperscriptBox[\(QA\), \(2\)] + 56\ 
+\*SuperscriptBox[\(Ms\), \(2\)]\ 
+\*SuperscriptBox[\(Mx\), \(2\)]\ 
+\*SuperscriptBox[\(QV\), \(4\)] - 1296\ 
+\*SuperscriptBox[\(Ms\), \(2\)]\ 
+\*SuperscriptBox[\(Mx\), \(2\)]\ 
+\*SuperscriptBox[\(QV\), \(2\)] + 48\ 
+\*SuperscriptBox[\(Mx\), \(4\)]\ 
+\*SuperscriptBox[\(QA\), \(4\)] + 672\ 
+\*SuperscriptBox[\(Mx\), \(4\)]\ 
+\*SuperscriptBox[\(QA\), \(2\)]\ 
+\*SuperscriptBox[\(QV\), \(2\)] - 5184\ 
+\*SuperscriptBox[\(Mx\), \(4\)]\ 
+\*SuperscriptBox[\(QA\), \(2\)] - 112\ 
+\*SuperscriptBox[\(Mx\), \(4\)]\ 
+\*SuperscriptBox[\(QV\), \(4\)] + 5184\ 
+\*SuperscriptBox[\(Mx\), \(4\)]\ 
+\*SuperscriptBox[\(QV\), \(2\)] + 177147\ 
+\*SuperscriptBox[\(Mx\), \(4\)])\) + 
+\*FractionBox[\(128\ 
+\*SuperscriptBox[\(Ms\), \(4\)]\ 
+\*SuperscriptBox[\(QV\), \(4\)] - 4\ 
+\*SuperscriptBox[\(Ms\), \(2\)]\ 
+\*SuperscriptBox[\(Mx\), \(2\)]\ \((256\ 
+\*SuperscriptBox[\(QV\), \(4\)] + 5184\ 
+\*SuperscriptBox[\(QV\), \(2\)])\) + 
+\*SuperscriptBox[\(Mx\), \(4\)]\ \((2048\ 
+\*SuperscriptBox[\(QV\), \(4\)] + 82944\ 
+\*SuperscriptBox[\(QV\), \(2\)] + 1259712)\)\), \(4\ 
+\*SuperscriptBox[\(r\), \(4\)]\)]\)
 
 
 kk=Normal[Series[pwave,{r,0,2}]]/.{\!\(TraditionalForm\`\(\(\ \)\(1/
@@ -315,47 +361,77 @@ kk=Normal[Series[pwave,{r,0,2}]]/.{\!\(TraditionalForm\`\(\(\ \)\(1/
 \*SuperscriptBox[\(Mx\), \(3\)])\), \(2\)]\)\)\)->1/((Ms^2-4 Mx^2)^2*Mx^2)}
 
 
-QVA={qL-> QV-QA, qR-> QV+QA};
+(* ::Text:: *)
+(*Coefficients*)
 
 
-kkk= Simplify[kk/.QVA]
+cm4=Simplify[Coefficient[pwave,r,-4]]
 
 
-Simplify[Coefficient[kkk,r,0]]
+cm2=Simplify[Coefficient[pwave,r,-2]]
 
 
-F12=Normal[Series[(pwave/.U1Q),{r,0,2}]]
+c0=Simplify[Coefficient[pwave,r,0]]
 
 
-F13=F12/.{\!\(TraditionalForm\`\(\(\ \)\(1/
+c2=Simplify[Coefficient[pwave,r,2]]
+
+
+pwave2 = cm4/r^4 + cm2/r^2 + c0 + c2*r^2 
+
+
+Simplify[pwave - pwave2]
+
+
+pwave2/(\!\(TraditionalForm\`\(\(384\)\(\ \)\(\[Pi]\)\(\ \)\)\)*\!\(TraditionalForm\`
 \*SuperscriptBox[\((
 \*SuperscriptBox[\(Ms\), \(2\)]\ Mx - 4\ 
-\*SuperscriptBox[\(Mx\), \(3\)])\), \(2\)]\)\)\)->1/((Ms^2-4 Mx^2)^2*Mx^2)}
+\*SuperscriptBox[\(Mx\), \(3\)])\), \(2\)]\)/(\!\(TraditionalForm\`
+\*SuperscriptBox[\(gBL\), \(4\)]\)))
 
 
-TeXForm[F13]
+TeXForm[pwave2/.{Mx->Subscript[M, \[CapitalPsi]],Ms->Subscript[m, h],gBL->Subscript[g, D]}]
 
 
-1906440/1536 - (476610/384)
+(1/sfactor)/.{Mx->Subscript[M, \[CapitalPsi]],Ms->Subscript[m, h],gBL->Subscript[g, D]}
 
 
-Escritura...
+TeXForm[%]
 
 
-nsfactor = \!\(TraditionalForm\`\(\(\ \)
-\*SuperscriptBox[\((
-\*SuperscriptBox[\(Ms\), \(2\)] - 4\ 
-\*SuperscriptBox[\(Mx\), \(2\)])\), \(2\)]\)\)(\!\(TraditionalForm\`64\ \[Pi]\ 
-\*SuperscriptBox[\(Mx\), \(2\)]\))/gBL^4
+(* ::Text:: *)
+(*in the MDEO model*)
 
 
-Coefficient[F13,r,-4]*nsfactor
+U1Q
 
 
-Coefficient[F13,r,-2]*nsfactor
+pwave2/.{QA->1/2,QV->9/2,Mx->Subscript[M, \[CapitalPsi]],Ms->Subscript[m, h]}
 
 
-Coefficient[F13,r,0]*nsfactor
+TeXForm[%]
 
 
-Coefficient[F13,r,2]*nsfactor
+(* ::Subsubsection:: *)
+(*Vector - like - limit*)
+
+
+kkk= Simplify[(pwave/sfactor)/.{QA->0,QV->1}]
+
+
+Limit[kkk,Ms->Infinity]
+
+
+Limit[%,r->0]
+
+
+16*6561/8
+
+
+16*13122
+
+
+16*59049
+
+
+8*111861
