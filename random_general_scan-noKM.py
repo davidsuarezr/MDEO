@@ -20,48 +20,50 @@ x=[]
 Num = int(sys.argv[1])
 
 for i in range(0,Num):
-    print(i)
+    #print(i)
     #Open the dicctionary
     xdict = pyMDEO_LesHouches_generator.buildSLHAinFile()
 
     #Random parameters
     MZ = 91.1876
     g1=3.55690247E-01
-    g1p = 1.05E-2 #U1 coupling
-    epsilon = 0
+    g1p = np.exp(np.random.uniform(np.log(10**(-3)),np.log(0.3))) #U1 coupling
+    #epsilon = np.exp(np.random.uniform(np.log(10**(-6)),np.log(10**(-2))))
+    epsilon = 0.0
     g1p1 = 0.
     g11p = -g1*epsilon
-    MZp = 5.0 
+    MZp = np.exp(np.random.uniform(np.log(1.0e0),np.log(1.0e3))) 
+    print(MZp)
     #MZp = np.exp(np.random.uniform(np.log(1.0e0),np.log(9.1e1))) 
     vX = MZp*(1.+epsilon**2)/(9.0*g1p)  #WARNING
     VEV = 246.220569
     #print('MZp=',MZp,g1p)
     
-    theta = 0.0
+    theta = np.exp(np.random.uniform(np.log(1.0e-6),np.log(1.0e-3)))
     gamma = 1.0/np.sqrt(1.0+np.tan(2.0*theta)**2.0)
     
     mh1=125.1
-    mh2= np.exp(np.random.uniform(np.log(10.),np.log(mh1))) #WARNING
+    mh2= np.exp(np.random.uniform(np.log(mh1),np.log(5.0e3))) #WARNING
     Lam1=(0.5/VEV**2.0)*(mh1**2.0+mh2**2.0-gamma*(mh2**2.0-mh1**2.0))
     
-    Lam2 = 0 #conj[Et].Et.conj[Et].Et
-    Lam3 = 0 #conj[H].H.conj[Et].Et
-    Lam4 = 0 #conj[H].Et.conj[Et].H
+    Lam2 = np.exp(np.random.uniform(np.log(10**(-4)),np.log(10**(0)))) #conj[Et].Et.conj[Et].Et
+    Lam3 = np.exp(np.random.uniform(np.log(10**(-4)),np.log(10**(0)))) #conj[H].H.conj[Et].Et
+    Lam4 = np.exp(np.random.uniform(np.log(10**(-4)),np.log(10**(0)))) #conj[H].Et.conj[Et].H
     Lam5 = (0.5/vX**2.0)*(mh1**2.0+mh2**2.0+gamma*(mh2**2.0-mh1**2.0)) ##conj[bi].bi.conj[bi].bi
-    Lam6 = 0 ##conj[bi].bi.conj[H].H
+    Lam6 = (0.5/(VEV*vX))*gamma*(mh2**2.0-mh1**2.0)*np.tan(2.0*theta) ##conj[bi].bi.conj[H].H
     #Perturbativity
     if Lam5 > np.sqrt(4.*np.pi) or Lam6 > np.sqrt(4.*np.pi):
         continue    
     
-    Lam7 = 0 #conj[bi].bi.conj[Et].Et
-    Lam8 = 0 ##conj[S].S.conj[S].S
-    Lam9 = 0 #conj[S].S.conj[H].H
-    Lam10 =0 #conj[S].S.conj[bi].bi
-    Lam11 = 0 ##conj[S].S.conj[Et].Et
-    MS2 = 1.0E10 #conj[S].S
-    Mn2 = 1.0E8 #mEt2 conj[Et].Et
-    Yc = 0.25619810 # Yc bi.CL.CR
-    muC = 11E-10 #muC conj[H].Et.conj[S]
+    Lam7 = np.exp(np.random.uniform(np.log(10**(-4)),np.log(10**(0)))) #conj[bi].bi.conj[Et].Et
+    Lam8 = np.exp(np.random.uniform(np.log(10**(-4)),np.log(10**(0)))) ##conj[S].S.conj[S].S
+    Lam9 = np.exp(np.random.uniform(np.log(10**(-4)),np.log(10**(0)))) #conj[S].S.conj[H].H
+    Lam10 = np.exp(np.random.uniform(np.log(10**(-4)),np.log(10**(0)))) #conj[S].S.conj[bi].bi
+    Lam11 = np.exp(np.random.uniform(np.log(10**(-4)),np.log(10**(0)))) ##conj[S].S.conj[Et].Et
+    MS2 = np.exp(np.random.uniform(np.log(10**(6)),np.log(10**(8)))) #conj[S].S
+    Mn2 = np.exp(np.random.uniform(np.log(10**(6)),np.log(10**(8)))) #mEt2 conj[Et].Et
+    Yc = np.exp(np.random.uniform(np.log(10**(-3)),np.log(10**(0)))) # Yc bi.CL.CR
+    muC = np.exp(np.random.uniform(np.log(10**(2)),np.log(2.*10**(3)))) #muC conj[H].Et.conj[S]
 
     xdict.blocks['MINPAR'].entries[1]='%.6E    # lambda1Input'%Lam1
     xdict.blocks['MINPAR'].entries[2]='%.6E    # lambda2Input'%Lam2
@@ -85,9 +87,9 @@ for i in range(0,Num):
     
     mChi = Yc*vX/np.sqrt(2.)
         
-    MX1 = 50.
-    MX2 = 75.
-    thetaf = 0
+    MX1 = mChi+np.exp(np.random.uniform(np.log(1.0),np.log(5.0e3)))
+    MX2 = MX1+np.exp(np.random.uniform(np.log(1.0),np.log(1.0e3)))
+    thetaf = np.exp(np.random.uniform(np.log(1.0e-3),np.log(2.0*np.pi)))
     gammaf = 1.0/np.sqrt(1.0+np.tan(2.0*thetaf)**2.0)
     YX11 = np.sqrt(2.0)/vX*0.5*(MX1+MX2-gammaf*(MX2-MX1)) #Yx bi.FxL.FxR
     YX22 = np.sqrt(2.0)/vX*0.5*(MX1+MX2+gammaf*(MX2-MX1))
@@ -296,4 +298,4 @@ xd=pd.DataFrame(x,columns=['Lam1','Lam2','Lam3','Lam4','Lam5','Lam6','Lam7','Lam
 xd.to_csv('xd_scan-general-'+sys.argv[2]+'.csv')
 
 t2=time.time() 
-print ("The program spent", t2-t1, "s running",Num,"times -> noKM-xd_scan",sys.argv[2],".csv")
+print ("The program spent", t2-t1, "s running",Num,"times -> xd_scan",sys.argv[2],".csv")
