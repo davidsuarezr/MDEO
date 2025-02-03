@@ -196,6 +196,15 @@ swave=\!\(TraditionalForm\`
 (1519-1357-162)
 
 
+<<<<<<< Updated upstream
+=======
+162/16
+
+
+Limit[F4,r->0]
+
+
+>>>>>>> Stashed changes
 (* ::Subsubsection:: *)
 (*P - wave part*)
 
@@ -209,6 +218,7 @@ sfactor = (\!\(TraditionalForm\`\(\(384\)\(\ \)\(\[Pi]\)\(\ \)\)\)*\!\(Tradition
 \*SuperscriptBox[\(Mx\), \(3\)])\), \(2\)]\)/(\!\(TraditionalForm\`
 \*SuperscriptBox[\(gBL\), \(4\)]\)))
 
+<<<<<<< Updated upstream
 
 F10=Simplify[F9*sfactor]
 
@@ -250,3 +260,5 @@ SuperscriptBox[\(r\), \(2\)]] + 476610\
 \*SuperscriptBox[\((
 \*SuperscriptBox[\(Ms\), \(2\)]\ Mx - 4\ 
 \*SuperscriptBox[\(Mx\), \(3\)])\), \(2\)]\)]\)
+=======
+>>>>>>> Stashed changes
